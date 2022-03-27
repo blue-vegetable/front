@@ -52,9 +52,9 @@
 </template>
 
 <script>
-import NavBar from './components/NavBar.vue'
+import NavBar from '@/components/NavBar.vue'
 import UserInformation from './components/UserInformation.vue'
-import PaperTable from './components/PaperTable.vue'
+import PaperTable from '@/components/PaperTable.vue'
 // import PaperTable from "./components/PaperTable.vue";
 
 export default {

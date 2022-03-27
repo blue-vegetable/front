@@ -88,6 +88,24 @@ export default {
         downloads: '100',
         uploadTime: '2022-3-21',
         detail: 'http://www.baidu.com/'
+      }, {
+        title: 'An efficient identity-based conditional privacy-preserving authentication scheme for vehicular ad hoc networks',
+        writers: 'Debiao He',
+        downloads: '100',
+        uploadTime: '2022-3-21',
+        detail: 'http://www.baidu.com/'
+      }, {
+        title: 'An efficient identity-based conditional privacy-preserving authentication scheme for vehicular ad hoc networks',
+        writers: 'Debiao He',
+        downloads: '100',
+        uploadTime: '2022-3-21',
+        detail: 'http://www.baidu.com/'
+      }, {
+        title: 'An efficient identity-based conditional privacy-preserving authentication scheme for vehicular ad hoc networks',
+        writers: 'Debiao He',
+        downloads: '100',
+        uploadTime: '2022-3-21',
+        detail: 'http://www.baidu.com/'
       }]
     }
   }

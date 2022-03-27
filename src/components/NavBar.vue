@@ -1,7 +1,8 @@
 <template>
-  <el-menu :default-active="activeIndex" mode="horizontal" @select="handleSelect">
-    <el-menu-item index="1">网站首页</el-menu-item>
-    <el-submenu index="2">
+  <el-menu :default-active="activeIndex" mode="horizontal" router @select="handleSelect">
+    <el-menu-item index="searchIndex"><router-link to="/searchIndex">网站首页</router-link></el-menu-item>
+    <el-menu-item index="writerProfile"><router-link to="/writerProfile">个人中心</router-link></el-menu-item>
+    <!-- <el-submenu index="2">
       <template slot="title">我的工作台</template>
       <el-menu-item index="2-1">选项1</el-menu-item>
       <el-menu-item index="2-2">选项2</el-menu-item>
@@ -12,8 +13,7 @@
         <el-menu-item index="2-4-2">选项2</el-menu-item>
         <el-menu-item index="2-4-3">选项3</el-menu-item>
       </el-submenu>
-    </el-submenu>
-    <el-menu-item index="3">用户信息</el-menu-item>
+    </el-submenu> -->
     <div style=" display: flex; justify-content: flex-end; ">
       <el-menu-item index="4">
         <a class="el-icon-message" href="http://www.baidu.com" />
@@ -32,7 +32,7 @@ export default {
   name: 'NavBar',
   data() {
     return {
-      activeIndex: '1'
+      activeIndex: this.$route.path.replace('/', '')
     }
   },
   methods: {

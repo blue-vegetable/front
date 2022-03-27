@@ -41,6 +41,15 @@ export const constantRoutes = [
     }
   },
   {
+    path: '/writerProfile',
+    component: () => import('@/pages/WriterProfile/WriterProfile'),
+    hidden: true,
+    name: 'writerProfile',
+    meta: {
+      title: '个人中心'
+    }
+  },
+  {
     path: '/login',
     component: () => import('@/views/login/index'),
     hidden: true
