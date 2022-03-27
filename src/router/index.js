@@ -32,6 +32,15 @@ import Layout from '@/layout'
  */
 export const constantRoutes = [
   {
+    path: '/searchIndex',
+    component: () => import('@/pages/SearchIndex/SearchIndex'),
+    hidden: true,
+    name: 'searchIndex',
+    meta: {
+      title: '首页'
+    }
+  },
+  {
     path: '/login',
     component: () => import('@/views/login/index'),
     hidden: true
@@ -165,7 +174,7 @@ export const constantRoutes = [
 ]
 
 const createRouter = () => new Router({
-  // mode: 'history', // require service support
+  mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRoutes
 })

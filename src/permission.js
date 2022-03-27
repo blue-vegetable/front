@@ -8,9 +8,13 @@ import getPageTitle from '@/utils/get-page-title'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
-const whiteList = ['/login'] // no redirect whitelist
+const whiteList = ['/login', '/searchIndex'] // no redirect whitelist
+
+// const myWhiteList = ['/searchIndex']
 
 router.beforeEach(async(to, from, next) => {
+  // change different page's title by router
+  document.title = to.meta.title
   // start progress bar
   NProgress.start()
 
@@ -52,7 +56,7 @@ router.beforeEach(async(to, from, next) => {
       next()
     } else {
       // other pages that do not have permission to access are redirected to the login page.
-      next(`/login?redirect=${to.path}`)
+      // next(`/login?redirect=${to.path}`)
       NProgress.done()
     }
   }
