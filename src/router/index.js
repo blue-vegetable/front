@@ -41,12 +41,30 @@ export const constantRoutes = [
     }
   },
   {
+    path: '/paperProfile',
+    component: () => import('@/pages/PaperProfile/PaperProfile'),
+    hidden: true,
+    name: 'paperProfile',
+    meta: {
+      title: '论文详情'
+    }
+  },
+  {
     path: '/writerProfile',
     component: () => import('@/pages/WriterProfile/WriterProfile'),
     hidden: true,
     name: 'writerProfile',
     meta: {
       title: '个人中心'
+    }
+  },
+  {
+    path: '/searchResult',
+    component: () => import('@/pages/SearchResult/SearchResult'),
+    hidden: true,
+    name: 'searchResult',
+    meta: {
+      title: '搜索结果'
     }
   },
   {
