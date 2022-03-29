@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-for="(paper, index) in papers" :key="index" :id="'paper' + index">
-      <el-link class="paperName" type="primary">{{ paper.name }}</el-link>
+      <el-link class="paperName" type="primary" href="/paperProfile">{{ paper.name }}</el-link>
       <br><br>
       <div class="paperWriter">{{ paper.writer }}</div>
       <br>

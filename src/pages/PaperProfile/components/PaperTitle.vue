@@ -5,7 +5,12 @@
 
 <script>
   export default {
-    name:"PaperTitle"
-   
+    name:"PaperTitle",
+    methods:{
+      goBack(){
+        this.$router.push('/searchResult')
+      }
+    }
   }
+
 </script>

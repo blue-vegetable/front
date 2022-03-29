@@ -1,9 +1,9 @@
 <template>
   <div class="demo-image">
-    <div v-for="fit in fits" :key="fit" class="block">
+    <div class="block">
       <el-image
         style="width: 100px; height: 100px"
-        :src="url"
+        :src="require('@/assets/logo.png')"
         :fit="fit"
       ></el-image>
     </div>
@@ -12,12 +12,6 @@
 
 <script>
 export default {
-  data() {
-    return {
-      fits: ["contain"],
-      url: '@/assets/logo.png',
-    };
-  },
 };
 </script>
 

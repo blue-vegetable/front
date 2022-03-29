@@ -10,7 +10,7 @@
             <span>{{ props.row.title }}</span>
           </el-form-item>
           <el-form-item label="论文作者">
-            <span>{{ props.row.writers }}</span>    <!-- 这里肯定要考虑多作者的情况, 如何考虑? -->
+            <span>{{ props.row.writers }}</span>    
           </el-form-item>
           <el-form-item label="论文下载量">
             <span>{{ props.row.downloads }}</span>
@@ -20,7 +20,7 @@
           </el-form-item>
           <el-form-item label="论文详情页">
             <!-- <a  href={{props.row.detail}}>论文详情点击此</a>   -->
-            <span>{{ props.row.detail }}</span>
+            <el-link :src="props.row.detail">详情点击此</el-link>
           </el-form-item>
         </el-form>
       </template>
@@ -62,6 +62,9 @@
 <script>
 export default {
   name: 'PaperTable',
+  methods:{
+    
+  },
   data() {
     return {
       tableData: [{

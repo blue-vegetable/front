@@ -1,12 +1,20 @@
 <template>
-  <el-input placeholder="请输入内容" v-model="input3" class="input-with-select">
-    <el-select v-model="select" slot="prepend" placeholder="请选择">
-      <el-option label="作者名" value="1"></el-option>
-      <el-option label="论文名" value="2"></el-option>
-      <el-option label="日期" value="3"></el-option>
-    </el-select>
-    <el-button slot="append" icon="el-icon-search"></el-button>
-  </el-input>
+  <div>
+    <el-input
+      placeholder="请输入内容"
+      v-model="input"
+      class="input-with-select"
+    >
+      <el-select v-model="select" slot="prepend">
+        <el-option label="论文名" value="1"></el-option>
+        <el-option label="作者名" value="2"></el-option>
+        <el-option label="日期" value="3"></el-option>
+      </el-select>
+      <el-button @click="searchClick(select)" slot="append" icon="el-icon-search" class="btn">搜索</el-button>
+      <!-- <el-button  slot="append" icon="el-icon-search"></el-button> -->
+    </el-input> 
+    
+  </div>
 </template>
 
 <style>
@@ -14,18 +22,32 @@
   width: 130px;
 }
 .input-with-select .el-input-group__prepend {
-  background-color: #fff;
+  background-color: rgb(252, 252, 252);
 }
+.el-input-group__append{
+  color:#fff;
+  background-color:#409eff
+}
+
 </style>
 <script>
 export default {
   name: "SearchInput",
+  methods:{
+    searchClick(data){
+      console.log(132)
+       this.$router.push({
+        path: "/searchResult",
+        query: {
+          date:new Date().getTime()
+        }
+      })
+    }
+  },
   data() {
     return {
-      input1: "",
-      input2: "",
-      input3: "",
-      select: "",
+      input:"",
+      select: "1",
     };
   },
 };

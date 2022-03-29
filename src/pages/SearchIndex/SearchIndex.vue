@@ -13,47 +13,44 @@
     <br />
     <el-row :gutter="10">
       <el-col :span="13" :offset="2">
+        <!-- 这一块是论文-->
         <el-card>
           <PaperTable />
         </el-card>
       </el-col>
+
       <el-col :span="6">
+        <!-- 这一块是技术栈-->
         <el-card>
-          <el-row>
-            <el-col :span="7">
-              <el-card>技术1</el-card>
-            </el-col>
-            <el-col :span="7" :offset="1">
-              <el-card>技术2</el-card>
-            </el-col>
-            <el-col :span="7" :offset="1">
-              <el-card>技术3</el-card>
-            </el-col>
-          </el-row>
-          <br />
-          <el-row>
-            <el-col :span="7">
-              <el-card>技术1</el-card>
-            </el-col>
-            <el-col :span="7" :offset="1">
-              <el-card>技术2</el-card>
-            </el-col>
-            <el-col :span="7" :offset="1">
-              <el-card>技术3</el-card>
+          <div slot="header" class="clearfix">
+            <span>技术栈</span>
+          </div>
+          <el-row :gutter="70">
+            <el-col v-for="(picobj, index) in tech" :key="index" :span="8">
+              <IndexRightTechStack :picture="picobj"></IndexRightTechStack>
+              <div v-if="index == 2"><br /></div>
             </el-col>
           </el-row>
         </el-card>
+
         <br />
+        <!-- 这一块是跑马灯-->
         <IndexCarousel />
         <br />
+
         <el-card class="box-card">
           <div slot="header" class="clearfix">
             <span>最新论文</span>
-            <el-button style="float: right; padding: 3px 0" type="text">更多</el-button>
+            <el-button style="float: right; padding: 3px 0" type="text"
+              >更多</el-button
+            >
           </div>
-          <div v-for="(item,index) in latestPapers" :key="index">
-           <el-link :href="item.url" target="_blank">{{index+1 }}    {{ item.paperName }}</el-link>
-            <br>
+          <div v-for="(item, index) in latestPapers" :key="index">
+            <span style="color: grey">{{ index + 1 }}</span>
+            <el-link :href="item.url" target="_blank">{{
+              item.paperName
+            }}</el-link>
+            <br />
           </div>
         </el-card>
       </el-col>
@@ -67,6 +64,7 @@ import SearchInput from "./components/SearchInput.vue";
 import LogoImage from "./components/LogoImage.vue";
 import PaperTable from "@/components/PaperTable.vue";
 import IndexCarousel from "./components/IndexCarousel.vue";
+import IndexRightTechStack from "./components/IndexRightTechStack.vue";
 
 export default {
   name: "SeachIndex",
@@ -76,9 +74,40 @@ export default {
     LogoImage,
     PaperTable,
     IndexCarousel,
+    IndexRightTechStack,
+  },
+  watch: {
+    
   },
   data() {
     return {
+      tech: [
+        {
+          name: "FABRIC",
+          src: require("@/assets/tech-stack/hyperledger.png"),
+        },
+        {
+          name: "IPFS",
+          src: require("@/assets/tech-stack/ipfs.png"),
+        },
+
+        {
+          name: "NLP",
+          src: require("@/assets/tech-stack/nlp.jpg"),
+        },
+        {
+          name: "SPRING",
+          src: require("@/assets/tech-stack/spring.png"),
+        },
+        {
+          name: "MONGODB",
+          src: require("@/assets/tech-stack/mongodb.png"),
+        },
+        {
+          name: "VUE2",
+          src: require("@/assets/tech-stack/vue.png"),
+        },
+      ],
       latestPapers: [
         {
           paperName: "这是一篇论文",
