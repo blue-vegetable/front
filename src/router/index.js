@@ -66,7 +66,7 @@ export const constantRoutes = [
     meta: {
       title: '搜索结果'
     },
-    props : true
+    props: true
   },
   {
     path: '/login',
