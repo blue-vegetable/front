@@ -10,8 +10,6 @@ NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 const whiteList = ['/login', '/searchIndex', '/writerProfile', '/searchResult','/paperProfile'] // no redirect whitelist
 
-// const myWhiteList = ['/searchIndex']
-
 router.beforeEach(async(to, from, next) => {
   // change different page's title by router
   document.title = to.meta.title

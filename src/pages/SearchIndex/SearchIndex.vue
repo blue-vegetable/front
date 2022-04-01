@@ -2,7 +2,12 @@
   <div id="app">
     <NavBar />
     <br />
-    <LogoImage />
+    <el-row :gutter="80">
+      <el-col :offset="10" :span="8">
+          <LogoImage />
+      </el-col>
+    </el-row>
+    
     <el-row>
       <el-col :span="12" :offset="6">
         <SearchInput />

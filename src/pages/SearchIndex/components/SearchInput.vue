@@ -10,10 +10,15 @@
         <el-option label="作者名" value="2"></el-option>
         <el-option label="日期" value="3"></el-option>
       </el-select>
-      <el-button @click="searchClick(select)" slot="append" icon="el-icon-search" class="btn">搜索</el-button>
+      <el-button
+        @click="searchClick(select,input)"
+        slot="append"
+        icon="el-icon-search"
+        class="btn"
+        >搜索</el-button
+      >
       <!-- <el-button  slot="append" icon="el-icon-search"></el-button> -->
-    </el-input> 
-    
+    </el-input>
   </div>
 </template>
 
@@ -24,29 +29,35 @@
 .input-with-select .el-input-group__prepend {
   background-color: rgb(252, 252, 252);
 }
-.el-input-group__append{
-  color:#fff;
-  background-color:#409eff
+.el-input-group__append {
+  color: #fff;
+  background-color: #409eff;
 }
-
 </style>
 <script>
 export default {
   name: "SearchInput",
-  methods:{
-    searchClick(data){
-      console.log(132)
-       this.$router.push({
-        path: "/searchResult",
-        query: {
-          date:new Date().getTime()
+  methods: {
+    searchClick(select,input) {
+      this.$router.push({
+        name :"searchResult",
+        params:{
+          type: select,
+          input:input,
+          id:1
         }
       })
-    }
+      console.log(this.$route.params.id)
+      
+      if(this.$route.path != '/searchIndex'){
+        // console.log("here into it ")
+        // this.$router.go(0)
+      }
+    },
   },
   data() {
     return {
-      input:"",
+      input: "",
       select: "1",
     };
   },

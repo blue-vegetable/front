@@ -25,8 +25,6 @@
 </template>
 
 
-
-
 <script>
 import ResultNavBar from "./components/ResultNavBar.vue";
 import ResultSideBar from "./components/ResultSideBar.vue";
@@ -34,7 +32,8 @@ import ResultMiddle from "./components/ResultMiddle.vue";
 import ResultRight from "./components/ResultRight.vue";
 
 export default {
-  name: "SeachIndex",
+  name: "SearchResult",
+  props:['select','input','id'],
   components: {
     ResultNavBar,
     ResultSideBar,
@@ -44,5 +43,15 @@ export default {
   data() {
     return {};
   },
+  mounted(){
+    this.getParams()
+  },
+  methods:{
+    getParams(){
+      // var input = this.$route.params.input
+      // var select = this.$route.params.select
+      console.log(this.$route.params.id)
+    }
+  }
 };
 </script>

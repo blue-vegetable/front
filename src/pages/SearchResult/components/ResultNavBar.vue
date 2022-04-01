@@ -2,7 +2,6 @@
   <el-menu
     mode="horizontal"
     router
-    @select="handleSelect"
     text-color="#ffffff"
     background-color="#409eff"
     active-text-color="#ffffff"
@@ -17,9 +16,9 @@
             class="input-with-select"
           >
             <el-select v-model="select" slot="prepend" placeholder="请选择">
-              <el-option label="餐厅名" value="1"></el-option>
-              <el-option label="订单号" value="2"></el-option>
-              <el-option label="用户电话" value="3"></el-option>
+              <el-option label="论文名" value="1"></el-option>
+              <el-option label="作者名" value="2"></el-option>
+              <el-option label="时间" value="3"></el-option>
             </el-select>
             <el-button slot="append" icon="el-icon-search"></el-button>
           </el-input>
@@ -42,13 +41,18 @@ export default {
   name: "ResultNavBar",
   data() {
     return {
-      input: "",
+      select:"1",
+      input3: "",
     };
   },
-  methods: {
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath);
-    },
-  },
+  watch:{
+    '$route' (to, from) {
+      if(to.path!=from.path && from.path!='/'){
+        this.$router.go()
+      }
+      // console.log(to.path)
+      // console.log(from.path)
+    }
+  }
 };
 </script>
