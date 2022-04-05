@@ -40,14 +40,22 @@
 <script>
 export default {
   name: 'ResultMiddle',
-  props: ['year'],
+  props: ['input', 'select', 'year'],
   data() {
     return {
+      keyword: '',
+      field: '',
       papers: ''
     }
   },
   watch: {
     year: function() {
+      this.getPaper()
+    },
+    input: function() {
+      this.getPaper()
+    },
+    select: function() {
       this.getPaper()
     }
   },
@@ -55,6 +63,8 @@ export default {
     this.$axios.get('http://localhost:12000/feedback/all')
       .then(response => (this.papers = response.data))
       .catch(error => console.log(error))
+    console.log(this.year, this.input, this.select)
+    this.getPaper()
   },
   methods: {
     getPaper() {

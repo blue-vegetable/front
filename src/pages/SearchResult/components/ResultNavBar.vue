@@ -11,16 +11,16 @@
       <el-menu-item>
         <div>
           <el-input
-            v-model="input3"
+            v-model="input"
             placeholder="请输入内容"
             class="input-with-select"
           >
-            <el-select slot="prepend" v-model="select" placeholder="请选择">
+            <el-select slot="prepend" v-model="select" style="width:100px" placeholder="请选择">
               <el-option label="论文名" value="1" />
               <el-option label="作者名" value="2" />
               <el-option label="时间" value="3" />
             </el-select>
-            <el-button slot="append" icon="el-icon-search" />
+            <el-button slot="append" style="background-color:0xffffff" icon="el-icon-search" @click="search(select,input)" />
           </el-input>
         </div>
       </el-menu-item>
@@ -42,7 +42,7 @@ export default {
   data() {
     return {
       select: '1',
-      input3: ''
+      input: ''
     }
   },
   watch: {
@@ -52,6 +52,11 @@ export default {
       }
       // console.log(to.path)
       // console.log(from.path)
+    }
+  },
+  methods: {
+    search(select, input) {
+      this.$emit('navSearch', { 'select': select, 'input': input })
     }
   }
 }
