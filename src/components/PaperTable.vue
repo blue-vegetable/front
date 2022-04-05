@@ -10,7 +10,7 @@
             <span>{{ props.row.title }}</span>
           </el-form-item>
           <el-form-item label="论文作者">
-            <span>{{ props.row.writers }}</span>    
+            <span>{{ props.row.writers }}</span>
           </el-form-item>
           <el-form-item label="论文下载量">
             <span>{{ props.row.downloads }}</span>
@@ -62,9 +62,6 @@
 <script>
 export default {
   name: 'PaperTable',
-  methods:{
-    
-  },
   data() {
     return {
       tableData: [{
@@ -111,6 +108,9 @@ export default {
         detail: 'http://www.baidu.com/'
       }]
     }
+  },
+  methods: {
+
   }
 }
 </script>
