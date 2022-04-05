@@ -40,15 +40,29 @@
 <script>
 export default {
   name: 'ResultMiddle',
+  props: ['year'],
   data() {
     return {
       papers: ''
+    }
+  },
+  watch: {
+    year: function() {
+      this.getPaper()
     }
   },
   mounted() {
     this.$axios.get('http://localhost:12000/feedback/all')
       .then(response => (this.papers = response.data))
       .catch(error => console.log(error))
+  },
+  methods: {
+    getPaper() {
+      this.$axios.get('http://localhost:12000/feedback/all')
+        .then(response => (this.papers = response.data))
+        .catch(error => console.log(error))
+    }
   }
+
 }
 </script>

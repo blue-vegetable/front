@@ -7,7 +7,7 @@
         <el-card class="box-card"><ResultSideBar @timeBySideBar="searchLimitTime" /></el-card>
       </el-col>
       <el-col :span="12">
-        <el-card class="box-card"><ResultMiddle /></el-card>
+        <el-card class="box-card"><ResultMiddle :year="year" /></el-card>
       </el-col>
       <el-col :span="5">
         <el-card class="box-card">
@@ -41,7 +41,9 @@ export default {
   },
   props: ['select', 'input', 'id'],
   data() {
-    return {}
+    return {
+      year: ''
+    }
   },
   mounted() {
     this.getParams()
@@ -53,7 +55,8 @@ export default {
       console.log(this.$route.params.id)
     },
     searchLimitTime(year) {
-      console.log(year)
+      this.year = year
+      console.log(this.year)
     }
   }
 }
