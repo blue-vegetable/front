@@ -42,46 +42,13 @@ export default {
   name: 'ResultMiddle',
   data() {
     return {
-      papers: [
-        {
-          id: '1',
-          name: '一个瞎鸡儿写的论文标题，测试中文',
-          writer: 'A Kosba,A Miller,E Shi,Z Wen,C Papamanthou',
-          rate: '3',
-          abstract:
-            '一个非常非常少的字数的摘要，但是要假装写的长一点,一个非常非常少的字数的摘要，但是要假装写的长一点,一个非常非常少的字数的摘要，但是要假装写的长一点,一个非常非常少的字数的摘要，但是要假装写的长一点,一个非常非常少的字数的摘要，但是要假装写的长一点',
-          time: '2020-2-22',
-          keywords: ['计算机', '计算机', '计算机', '计算机', '计算机', '计算机', '计算机', '计算机', '计算机']
-        },
-        {
-          id: '1',
-          name: 'Hawk: The Blockchain Model of Cryptography and Privacy-Preserving Smart Contracts',
-          writer: 'A Kosba,A Miller,E Shi,Z Wen,C Papamanthou',
-          rate: '3',
-          abstract:
-            '一个非常非常少的字数的摘要，但是要假装写的长一点,一个非常非常少的字数的摘要，但是要假装写的长一点,一个非常非常少的字数的摘要，但是要假装写的长一点,一个非常非常少的字数的摘要，但是要假装写的长一点,一个非常非常少的字数的摘要，但是要假装写的长一点',
-          time: '2020-2-22'
-        },
-        {
-          id: '1',
-          name: 'Hawk: The Blockchain Model of Cryptography and Privacy-Preserving Smart Contracts',
-          writer: 'A Kosba,A Miller,E Shi,Z Wen,C Papamanthou',
-          rate: '3',
-          abstract:
-            '一个非常非常少的字数的摘要，但是要假装写的长一点,一个非常非常少的字数的摘要，但是要假装写的长一点,一个非常非常少的字数的摘要，但是要假装写的长一点,一个非常非常少的字数的摘要，但是要假装写的长一点,一个非常非常少的字数的摘要，但是要假装写的长一点',
-          time: '2020-2-22'
-        },
-        {
-          id: '1',
-          name: 'Hawk: The Blockchain Model of Cryptography and Privacy-Preserving Smart Contracts',
-          writer: 'A Kosba,A Miller,E Shi,Z Wen,C Papamanthou',
-          rate: '3',
-          abstract:
-            '一个非常非常少的字数的摘要，但是要假装写的长一点,一个非常非常少的字数的摘要，但是要假装写的长一点,一个非常非常少的字数的摘要，但是要假装写的长一点,一个非常非常少的字数的摘要，但是要假装写的长一点,一个非常非常少的字数的摘要，但是要假装写的长一点',
-          time: '2020-2-22'
-        }
-      ]
+      papers: ''
     }
+  },
+  mounted() {
+    this.$axios.get('http://localhost:12000/feedback/all')
+      .then(response => (this.papers = response.data))
+      .catch(error => console.log(error))
   }
 }
 </script>

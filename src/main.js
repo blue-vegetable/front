@@ -17,6 +17,7 @@ import '@/permission' // permission control
 import './plugins/element.js'
 import axios from 'axios'
 import '../mock/papers.js'
+
 Vue.prototype.$axios = axios
 /**
  * If you don't want to use mock-server
