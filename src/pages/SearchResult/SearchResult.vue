@@ -4,7 +4,7 @@
     <br>
     <el-row :gutter="10">
       <el-col :offset="2" :span="3">
-        <el-card class="box-card"><ResultSideBar /></el-card>
+        <el-card class="box-card"><ResultSideBar @timeBySideBar="searchLimitTime" /></el-card>
       </el-col>
       <el-col :span="12">
         <el-card class="box-card"><ResultMiddle /></el-card>
@@ -51,6 +51,9 @@ export default {
       // var input = this.$route.params.input
       // var select = this.$route.params.select
       console.log(this.$route.params.id)
+    },
+    searchLimitTime(year) {
+      console.log(year)
     }
   }
 }

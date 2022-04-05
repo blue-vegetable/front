@@ -2,7 +2,7 @@
   <el-collapse v-model="activeNames" @change="handleChange">
     <el-collapse-item title="时间" name="1">
       <div v-for="(year,index) in years" :key="index">
-        <el-button size="mini" round @click="timeClick">{{ year }}</el-button>
+        <el-button size="mini" round @click="timeClick(year)">{{ year }}</el-button>
         <br>
       </div>
     </el-collapse-item>
@@ -43,8 +43,8 @@ export default {
     handleChange(val) {
       console.log(val)
     },
-    timeClick() {
-      console.log(123)
+    timeClick(year) {
+      this.$emit('timeBySideBar', year)
     }
   }
 }
