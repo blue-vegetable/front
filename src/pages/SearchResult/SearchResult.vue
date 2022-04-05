@@ -52,7 +52,7 @@ export default {
     getParams() {
       // var input = this.$route.params.input
       // var select = this.$route.params.select
-      console.log(this.$route.params.id)
+      console.log(this.$route.params.input)
     },
     searchLimitTime(year) {
       this.year = year

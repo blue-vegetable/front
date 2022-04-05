@@ -1,9 +1,9 @@
 <template>
   <div>
     <div v-for="(paper, index) in papers" :id="'paper' + index" :key="index">
-      <el-link class="paperName" type="primary" href="/paperProfile">{{ paper.name }}</el-link>
+      <el-link type="primary"><router-link class="paperName" :to="{ path: '/paperProfile', query: { id: paper.id }}">{{ paper.name }}</router-link></el-link>
       <br><br>
-      <div class="paperWriter">{{ paper.writer }}</div>
+      <el-link><router-link class="paperWriter" :to="{ path: '/writerProfile', query: { id: paper.writer }}">{{ paper.writer }}</router-link></el-link>
       <br>
       <div class="paperAbstract">{{ paper.abstract }}</div>
       <br>
