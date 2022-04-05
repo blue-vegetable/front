@@ -1,62 +1,18 @@
 <template>
-  <el-table
-    :data="tableData"
-    style="width: 100%"
-  >
-    <el-table-column type="expand">
-      <template slot-scope="props">
-        <el-form label-position="left" inline class="demo-table-expand">
-          <el-form-item label="论文标题">
-            <span>{{ props.row.title }}</span>
-          </el-form-item>
-          <el-form-item label="论文作者">
-            <span>{{ props.row.writers }}</span>
-          </el-form-item>
-          <el-form-item label="论文下载量">
-            <span>{{ props.row.downloads }}</span>
-          </el-form-item>
-          <el-form-item label="上传时间">
-            <span>{{ props.row.uploadTime }}</span>
-          </el-form-item>
-          <el-form-item label="论文详情页">
-            <!-- <a  href={{props.row.detail}}>论文详情点击此</a>   -->
-            <el-link :src="props.row.detail">详情点击此</el-link>
-          </el-form-item>
-        </el-form>
-      </template>
-    </el-table-column>
-    <!--这里需要进行一个el-table-column的列的长度的分配 -->
-    <el-table-column
-      label="论文标题"
-      prop="title"
-      :min-width="60"
-    />
-    <el-table-column
-      label="论文作者"
-      prop="writers"
-      :min-width="15"
-    />
-    <el-table-column
-      label="被引量"
-      prop="downloads"
-      :min-width="15"
-    />
-  </el-table>
+  <div id="app">
+    <el-row :gutter="20">
+      <el-col v-for="(item,index) in detailTypes" :key="index" :types="types" :span="8">
+        <el-card shadow="hover" style="height:200px;margin-bottom:10px">
+          <p style="text-align:center">{{ types[index] }}</p>
+          <el-link v-for="(littleType,index2) in item" :key="index2" style="margin-bottom:20px;margin-right:20px">{{ littleType }}</el-link>
+        </el-card>
+      </el-col>
+    </el-row>
+  </div>
 </template>
 
 <style>
-  .demo-table-expand {
-    font-size: 0;
-  }
-  .demo-table-expand label {
-    width: 90px;
-    color: #99a9bf;
-  }
-  .demo-table-expand .el-form-item {
-    margin-right: 0;
-    margin-bottom: 0;
-    width: 100%;
-  }
+
 </style>
 
 <script>
@@ -64,49 +20,13 @@ export default {
   name: 'PaperTable',
   data() {
     return {
-      tableData: [{
-        title: 'An efficient identity-based conditional privacy-preserving authentication scheme for vehicular ad hoc networks',
-        writers: 'Debiao He',
-        downloads: '100',
-        uploadTime: '2022-3-21',
-        detail: 'http://www.baidu.com/'
-      }, {
-        title: 'A survey on privacy protection in blockchain system',
-        writers: 'Debiao He',
-        downloads: '100',
-        uploadTime: '2022-3-21',
-        detail: 'http://www.baidu.com/'
-      }, {
-        title: 'Robust biometrics-based authentication scheme for multiserver environment',
-        writers: 'Debiao He',
-        downloads: '100',
-        uploadTime: '2022-3-21',
-        detail: 'http://www.baidu.com/'
-      }, {
-        title: 'An analysis of RFID authentication schemes for internet of things in healthcare environment using elliptic curve cryptography',
-        writers: 'Debiao He',
-        downloads: '100',
-        uploadTime: '2022-3-21',
-        detail: 'http://www.baidu.com/'
-      }, {
-        title: 'An efficient identity-based conditional privacy-preserving authentication scheme for vehicular ad hoc networks',
-        writers: 'Debiao He',
-        downloads: '100',
-        uploadTime: '2022-3-21',
-        detail: 'http://www.baidu.com/'
-      }, {
-        title: 'An efficient identity-based conditional privacy-preserving authentication scheme for vehicular ad hoc networks',
-        writers: 'Debiao He',
-        downloads: '100',
-        uploadTime: '2022-3-21',
-        detail: 'http://www.baidu.com/'
-      }, {
-        title: 'An efficient identity-based conditional privacy-preserving authentication scheme for vehicular ad hoc networks',
-        writers: 'Debiao He',
-        downloads: '100',
-        uploadTime: '2022-3-21',
-        detail: 'http://www.baidu.com/'
-      }]
+      types: ['文', '法', '理', '工', '农', '医'],
+      detailTypes: [['文学', '艺术', '历史', '哲学', '管理', '教育'],
+        ['习惯法', '自然法', '法律思想', '法经济学', '法社会学', '法哲学'],
+        ['生物', '化学', '物理', '数学', '天文', '地球科学'],
+        ['计算机', '电子', '机械', '材料科学', '水利', '建筑'],
+        ['农业经济', '农业工程', '园艺', '畜牧', '农业基础科学'],
+        ['中医学', '临床医学', '基础医学', '口腔医学']]
     }
   },
   methods: {
