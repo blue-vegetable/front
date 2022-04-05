@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import ResultNavBar from './components/ResultNavBar.vue'
+import ResultNavBar from '../../components/ResultNavBar.vue'
 import ResultSideBar from './components/ResultSideBar.vue'
 import ResultMiddle from './components/ResultMiddle.vue'
 import ResultRight from './components/ResultRight.vue'

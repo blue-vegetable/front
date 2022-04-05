@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <ResultNavBar />
+    <br>
     <PaperTitle />
     <el-row>
       <!-- 这个el-row为了限制card的大小, 使其占中间位置 -->
@@ -71,6 +73,7 @@ import PaperTag from './components/PaperTag.vue'
 import PaperButton from './components/PaperButton.vue'
 
 import PaperComment from './components/PaperComment.vue'
+import ResultNavBar from '@/components/ResultNavBar.vue'
 
 export default {
   name: 'PaperProfile',
@@ -78,8 +81,8 @@ export default {
     PaperTitle,
     PaperTag,
     PaperButton,
-
-    PaperComment
+    PaperComment,
+    ResultNavBar
   }
 }
 </script>
