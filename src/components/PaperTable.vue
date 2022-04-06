@@ -3,7 +3,7 @@
     <el-row :gutter="20">
       <el-col v-for="(item,index) in detailTypes" :key="index" :types="types" :span="8">
         <el-card shadow="hover" style="height:200px;margin-bottom:10px">
-          <p style="text-align:center">{{ types[index] }}</p>
+          <div style="text-align:center;font-size:32px;position:relative;top:-15px">{{ types[index] }}</div>
           <el-link v-for="(littleType,index2) in item" :key="index2" style="margin-bottom:20px;margin-right:20px">{{ littleType }}</el-link>
         </el-card>
       </el-col>
