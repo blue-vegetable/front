@@ -8,7 +8,7 @@
       <div class="paperAbstract">{{ paper.abstract }}</div>
       <br>
       <div class="paperRate">
-        用户评分：{{ paper.rate }} <br> 上传时间:{{ paper.time }}
+        用户评分：{{ paper.rate }} <br> 上传时间 : {{ paper.time }}
       </div>
       <br>
       <el-row>

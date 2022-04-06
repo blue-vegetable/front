@@ -20,16 +20,16 @@
           </el-badge>
         </el-menu-item>
         <el-menu-item index="5">
-          <el-dropdown>
+          <el-dropdown @command="handleDropdown">
             <span style="height:100%">
               个人中心
             </span>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item v-if="!logOrNot" icon="el-icon-user"><el-button type="text" @click="centerDialogVisible = true">登录</el-button></el-dropdown-item>
-              <el-dropdown-item v-if="!logOrNot" icon="el-icon-s-order"><el-button type="text" @click="SignUpDialogVisible = true">注册</el-button></el-dropdown-item>
-              <el-dropdown-item v-if="logOrNot" icon="el-icon-s-fold">我的论文</el-dropdown-item>
-              <el-dropdown-item v-if="logOrNot" icon="el-icon-message">我的消息</el-dropdown-item>
-              <el-dropdown-item v-if="logOrNot" icon="el-icon-cpu">控制台</el-dropdown-item>
+              <el-dropdown-item v-if="!logOrNot" command="1" icon="el-icon-user"><el-button type="text" @click="centerDialogVisible = true">登录</el-button></el-dropdown-item>
+              <el-dropdown-item v-if="!logOrNot" command="2" icon="el-icon-s-order"><el-button type="text" @click="SignUpDialogVisible = true">注册</el-button></el-dropdown-item>
+              <el-dropdown-item v-if="logOrNot" command="3" icon="el-icon-s-fold">我的论文</el-dropdown-item>
+              <el-dropdown-item v-if="logOrNot" command="4" icon="el-icon-message">我的消息</el-dropdown-item>
+              <el-dropdown-item v-if="logOrNot" command="5" icon="el-icon-cpu">控制台</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </el-menu-item>
@@ -55,7 +55,7 @@
         <el-button type="primary" @click="centerDialogVisible = false">登 录</el-button>
       </span>
     </el-dialog>
-     <!-- 下面是注册弹窗，为减少组件传参故直接放于此NavBar中 -->
+    <!-- 下面是注册弹窗，为减少组件传参故直接放于此NavBar中 -->
     <el-dialog
       title="注册"
       :visible.sync="SignUpDialogVisible"
@@ -103,6 +103,12 @@ export default {
   methods: {
     handleSelect(key, keyPath) {
       console.log(key, keyPath)
+    },
+    handleDropdown(type) {
+      if (type > 0) {
+        this.$router.push('/userCenter')
+      }
+      console.log(type)
     }
   }
 }
