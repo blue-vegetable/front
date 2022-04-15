@@ -1,5 +1,5 @@
 import { login, logout, getInfo } from '@/api/user'
-import { getToken, setToken, removeToken } from '@/utils/auth'
+import { getToken, setToken, removeToken, getMyToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
 
 const getDefaultState = () => {
@@ -7,7 +7,7 @@ const getDefaultState = () => {
     token: getToken(),
     name: '',
     avatar: '',
-    roles: []
+    role: ''
   }
 }
 
@@ -26,13 +26,13 @@ const mutations = {
   SET_AVATAR: (state, avatar) => {
     state.avatar = avatar
   },
-  SET_ROLE: (state, roles) => {
-    state.roles = roles
+  SET_ROLE: (state, role) => {
+    state.role = role
   }
 }
 
 const actions = {
-  // user login
+  // user login, login 中设置token
   login({ commit }, userInfo) {
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
@@ -47,7 +47,7 @@ const actions = {
     })
   },
 
-  // get user info
+  // get user info， user info中可以设置role，我觉得
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
       getInfo(state.token).then(response => {
@@ -58,6 +58,11 @@ const actions = {
         const { name, avatar } = data
         commit('SET_NAME', name)
         commit('SET_AVATAR', avatar)
+        if (getMyToken()) {
+          commit('SET_ROLE', 'user')
+        } else if (getToken()) {
+          commit('SET_ROLE', 'admin')
+        }
         resolve(data)
       }).catch(error => {
         reject(error)

@@ -69,27 +69,6 @@ export const constantRoutes = [
     props: true
   },
   {
-    path: '/userCenter',
-    component: Layout,
-    redirect: '/userCenter/table',
-    name: 'userCenter',
-    meta: { title: 'UserCenter', icon: 'el-icon-s-help' },
-    children: [
-      {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
-      },
-      {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
-      }
-    ]
-  },
-  {
     path: '/login',
     component: () => import('@/views/login/index'),
     hidden: true
@@ -100,7 +79,27 @@ export const constantRoutes = [
     component: () => import('@/views/404'),
     hidden: true
   },
-
+  {
+    path: '/example',
+    component: Layout,
+    redirect: '/example/table',
+    name: 'Example',
+    meta: { title: 'Example', icon: 'el-icon-s-help', role: 'user' },
+    children: [
+      {
+        path: 'table',
+        name: 'Table',
+        component: () => import('@/views/table/index'),
+        meta: { title: 'Table', icon: 'table', role: 'user' }
+      },
+      {
+        path: 'tree',
+        name: 'Tree',
+        component: () => import('@/views/tree/index'),
+        meta: { title: 'Tree', icon: 'tree', role: 'user' }
+      }
+    ]
+  },
   {
     path: '/',
     component: Layout,
@@ -117,29 +116,7 @@ export const constantRoutes = [
   { path: '*', redirect: '/404', hidden: true }
 ]
 
-export const asyncRoutes = [
-  {
-    path: '/example',
-    component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'el-icon-s-help', roles: ['admin', 'user'] },
-    children: [
-      {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
-      },
-      {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
-      }
-    ]
-  },
-
+export const adminRoutes = [
   {
     path: '/form',
     component: Layout,
@@ -223,6 +200,30 @@ export const asyncRoutes = [
     ]
   }
 
+]
+
+export const userRoutes = [
+  {
+    path: '/userCenter',
+    component: Layout,
+    redirect: '/userCenter/table',
+    name: 'userCenter',
+    meta: { title: 'UserCenter', icon: 'el-icon-s-help' },
+    children: [
+      {
+        path: 'table',
+        name: 'Table',
+        component: () => import('@/views/table/index'),
+        meta: { title: 'Table', icon: 'table' }
+      },
+      {
+        path: 'tree',
+        name: 'Tree',
+        component: () => import('@/views/tree/index'),
+        meta: { title: 'Tree', icon: 'tree' }
+      }
+    ]
+  }
 ]
 
 const createRouter = () => new Router({

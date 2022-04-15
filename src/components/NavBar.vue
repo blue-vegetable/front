@@ -118,6 +118,10 @@ export default {
       console.log('123', getMyToken())
     },
     handleDropdown(type) {
+      if (type === '5') {
+        this.$router.push('/userCenter')
+        console.log('here 5')
+      }
       if (type === '6') {
         removeMyToken()
         this.logOrNot = false
