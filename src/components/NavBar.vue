@@ -90,7 +90,7 @@
 
 <script>
 import md5 from 'js-md5'
-import { getMyToken, removeMyToken, setMyToken } from '@/utils/auth'
+import store from '@/store'
 
 export default {
   name: 'NavBar',
@@ -108,22 +108,26 @@ export default {
     }
   },
   mounted() { // 在mount时判断用户是否登录
-    if (getMyToken()) {
-      console.log(getMyToken())
+    if (store.getters.role) {
+      console.log()
       this.logOrNot = true
     }
   },
   methods: {
     handleSelect(key, keyPath) {
-      console.log('123', getMyToken())
     },
     handleDropdown(type) {
-      if (type === '5') {
-        this.$router.push('/userCenter')
-        console.log('here 5')
+      if (type === '3') { // 我的论文
+        this.$router.push('/papers')
       }
-      if (type === '6') {
-        removeMyToken()
+      if (type === '4') { // 我的消息
+        this.$router.push('/message')
+      }
+      if (type === '5') { // 控制台
+        this.$router.push('/userCenter')
+      }
+      if (type === '6') { // 退出登录
+        store.dispatch('user/logout')
         this.logOrNot = false
         this.$message({
           type: 'success',
@@ -133,28 +137,19 @@ export default {
     },
     handleLogin() {
       this.password_md5 = md5(this.password_login)
-      this.$axios.post('http://localhost:12000/user/login', {
-        username: this.userid_login,
-        password: this.password_md5
-      })
-        .then((resp) => {
-          if (resp.data.code === 0) {
-            setMyToken(resp.data.data.token)
-
-            this.logOrNot = true
-            this.centerDialogVisible = false
-            this.$message({
-              type: 'success',
-              message: `登录成功`
-            })
-            this.logOrNot = true
-          } else {
-            this.logOrNot = false
-            this.$message({
-              type: 'error',
-              message: `帐号或密码错误`
-            })
-          }
+      this.$store.dispatch('user/login', { 'username': this.userid_login, 'password': this.password_md5 })
+      // this.$axios.post('/vue-admin-template/user/login', {
+      //   username: this.userid_login,
+      //   password: this.password_md5
+      // })
+        .then(() => {
+          this.logOrNot = true
+          this.centerDialogVisible = false
+          this.$message({
+            type: 'success',
+            message: `登录成功`
+          })
+          this.logOrNot = true
         })
         .catch((error) => {
           this.logOrNot = false

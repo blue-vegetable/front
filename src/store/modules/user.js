@@ -1,5 +1,5 @@
 import { login, logout, getInfo } from '@/api/user'
-import { getToken, setToken, removeToken, getMyToken } from '@/utils/auth'
+import { getToken, setToken, removeToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
 
 const getDefaultState = () => {
@@ -55,14 +55,11 @@ const actions = {
         if (!data) {
           return reject('Verification failed, please Login again.')
         }
-        const { name, avatar } = data
+        const { name, avatar, role } = data
         commit('SET_NAME', name)
         commit('SET_AVATAR', avatar)
-        if (getMyToken()) {
-          commit('SET_ROLE', 'user')
-        } else if (getToken()) {
-          commit('SET_ROLE', 'admin')
-        }
+        commit('SET_ROLE', role)
+        console.log('here is getInfo', name)
         resolve(data)
       }).catch(error => {
         reject(error)
