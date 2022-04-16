@@ -192,10 +192,10 @@ export const userRoutes = [
     meta: { title: '论文', icon: 'el-icon-s-help', role: 'user' },
     children: [
       {
-        path: 'table',
-        name: 'uploadedPapers',
-        component: () => import('@/views/table/index'),
-        meta: { title: '已上传论文', icon: 'table', role: 'user' }
+        path: 'complex-table',
+        component: () => import('@/views/table/complex-table'),
+        name: 'ComplexTable',
+        meta: { title: 'Complex Table' }
       },
       {
         path: 'tree',
