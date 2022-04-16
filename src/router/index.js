@@ -215,7 +215,7 @@ export const userRoutes = [
       {
         path: 'table',
         name: 'uploadedPapers',
-        component: () => import('@/views/form/index'),
+        component: () => import('@/views/upload/index'),
         meta: { title: '上传', icon: 'form', role: 'user' }
       }
     ]
