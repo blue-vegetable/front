@@ -80,34 +80,13 @@ export const constantRoutes = [
     hidden: true
   },
   {
-    path: '/example',
-    component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'el-icon-s-help', role: 'user' },
-    children: [
-      {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table', role: 'user' }
-      },
-      {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree', role: 'user' }
-      }
-    ]
-  },
-  {
     path: '/',
     component: Layout,
     redirect: '/dashboard',
     children: [
       {
         path: 'dashboard',
-        component: () => import('@/views/dashboard/index'),
+        component: () => import('@/views/dashboard2/index'),
         name: 'Dashboard',
         meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
       }
@@ -206,26 +185,42 @@ export const adminRoutes = [
 
 export const userRoutes = [
   {
-    path: '/userCenter',
+    path: '/papers',
     component: Layout,
-    redirect: '/userCenter/table',
-    name: 'userCenter',
-    meta: { title: 'UserCenter', icon: 'el-icon-s-help' },
+    redirect: '/papers/uploadedPapers',
+    name: 'papers',
+    meta: { title: '论文', icon: 'el-icon-s-help', role: 'user' },
     children: [
       {
         path: 'table',
-        name: 'Table',
+        name: 'uploadedPapers',
         component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
+        meta: { title: '已上传论文', icon: 'table', role: 'user' }
       },
       {
         path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
+        name: 'downloadedPapers',
+        component: () => import('@/views/table/index'),
+        meta: { title: '已下载论文', icon: 'tree', role: 'user' }
+      }
+    ]
+  },
+  {
+    path: '/upload',
+    component: Layout,
+    redirect: '/papers/upload',
+    name: 'uploadForm',
+    meta: { title: '上传论文', icon: 'el-icon-s-help', role: 'user' },
+    children: [
+      {
+        path: 'table',
+        name: 'uploadedPapers',
+        component: () => import('@/views/form/index'),
+        meta: { title: '上传', icon: 'form', role: 'user' }
       }
     ]
   }
+
 ]
 
 const createRouter = () => new Router({
