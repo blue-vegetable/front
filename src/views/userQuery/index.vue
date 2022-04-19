@@ -18,6 +18,8 @@
           <el-button slot="append" style="background-color:0xffffff" icon="el-icon-search" @click="search(select,input)" />
         </el-input>
         <br>
+        <br>
+        <br>
         <el-table
           :data="tableData"
           stripe
@@ -28,12 +30,12 @@
           <el-table-column
             prop="id"
             label="用户ID"
-            width="100"
+            width="80"
           />
           <el-table-column
             prop="name"
             label="用户名"
-            width="100"
+            width="80"
           />
           <el-table-column
             prop="time"
@@ -43,22 +45,22 @@
           <el-table-column
             prop="role"
             label="身份"
-            width="100"
+            width="60"
           />
           <el-table-column
             prop="upload"
             label="上传论文"
-            width="100"
+            width="80"
           />
           <el-table-column
             prop="feedback"
             label="举报论文"
-            width="100"
+            width="80"
           />
           <el-table-column
             prop="pay"
             label="购买论文"
-            width="100"
+            width="80"
           />
           <el-table-column
             label="操作"

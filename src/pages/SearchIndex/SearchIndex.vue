@@ -17,10 +17,18 @@
     <br>
     <br>
     <el-row :gutter="10">
-      <el-col :span="13" :offset="2">
+      <el-col :span="4" :offset="2">
         <!-- 这一块是论文-->
         <el-card>
-          <PaperTable />
+          <div slot="header" style="text-align: right;">
+            <span>论文分类</span>
+          </div>
+          <PaperType />
+        </el-card>
+      </el-col>
+      <el-col :span="10">
+        <el-card>
+          <IndexMiddle />
         </el-card>
       </el-col>
 
@@ -52,9 +60,9 @@
             >更多</el-button>
           </div>
           <div v-for="(item, index) in latestPapers" :key="index">
-            <span style="color: grey">{{ index + 1 }}</span>
+            <span style="color: grey">{{ index + 1 +' ' }}</span>
             <el-link :href="item.url" target="_blank">{{
-              item.paperName
+              item.name
             }}</el-link>
             <br>
           </div>
@@ -68,9 +76,10 @@
 import NavBar from '@/components/NavBar.vue'
 import SearchInput from './components/SearchInput.vue'
 import LogoImage from './components/LogoImage.vue'
-import PaperTable from '@/components/PaperTable.vue'
+import PaperType from '@/components/PaperType.vue'
 import IndexCarousel from './components/IndexCarousel.vue'
 import IndexRightTechStack from './components/IndexRightTechStack.vue'
+import IndexMiddle from './components/IndexMiddle.vue'
 
 export default {
   name: 'SeachIndex',
@@ -78,9 +87,10 @@ export default {
     NavBar,
     SearchInput,
     LogoImage,
-    PaperTable,
+    PaperType,
     IndexCarousel,
-    IndexRightTechStack
+    IndexRightTechStack,
+    IndexMiddle
   },
   data() {
     return {
@@ -135,8 +145,18 @@ export default {
       ]
     }
   },
-  watch: {
-
+  mounted() {
+    this.getLastestPaper()
+  },
+  methods: {
+    getLastestPaper() {
+      this.$axios.get('http://localhost:12000/paper/getLatest')
+        .then(response => {
+          this.latestPapers = response.data
+          console.log(this.latestPapers)
+        })
+        .catch(error => console.log(error))
+    }
   }
 }
 </script>
