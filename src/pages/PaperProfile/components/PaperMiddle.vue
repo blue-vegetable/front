@@ -24,7 +24,7 @@
       <el-row>
      <el-col :offset="0" :span="2">
               <el-badge :value="12" class="item">
-                <el-button size="small">评论</el-button>
+                <el-button size="small">下载</el-button>
               </el-badge>
             </el-col>
 
@@ -79,7 +79,7 @@ export default {
     this.$axios.get('http://localhost:12000/feedback/paper')
       .then(response => (this.paper = response.data))
       .catch(error => console.log(error))
-    console.log('here',this.paper,'123')
+
   },
 
   methods: {

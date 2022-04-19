@@ -12,12 +12,15 @@
               <PaperMiddle />
             </el-col>
           </el-row>
-
           <br />
         </el-card>
         <PaperButton />
         <br />
         <PaperComment />
+        <br />
+      
+        <CommentMiddle/>
+      
         <br />
         <el-row>
           <br />
@@ -35,6 +38,7 @@ import PaperTitle from "./components/PaperTitle.vue";
 import PaperButton from "./components/PaperButton.vue";
 import PaperMiddle from "./components/PaperMiddle.vue";
 import PaperComment from "./components/PaperComment.vue";
+import CommentMiddle from "./components/CommentMiddle.vue";
 import ResultNavBar from "@/components/ResultNavBar.vue";
 
 export default {
@@ -45,6 +49,7 @@ export default {
     PaperButton,
     PaperComment,
     ResultNavBar,
+    CommentMiddle,
     PaperMiddle,
   },
 };
