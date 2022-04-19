@@ -88,7 +88,7 @@ export const constantRoutes = [
         path: 'dashboard',
         component: () => import('@/views/dashboard2/index'),
         name: 'Dashboard',
-        meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
+        meta: { title: '面板', icon: 'dashboard', affix: true }
       }
     ]
   },
@@ -99,88 +99,31 @@ export const constantRoutes = [
 
 export const adminRoutes = [
   {
-    path: '/form',
+    path: '/user',
     component: Layout,
+    redirect: '/user/query',
     children: [
       {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form', roles: ['admin', 'user'] }
+        path: 'query',
+        name: 'userQuery',
+        component: () => import('@/views/userQuery/index'),
+        meta: { title: '用户查询', icon: 'form', role: 'admin' }
       }
     ]
   },
-
   {
-    path: '/nested',
+    path: '/feedback',
     component: Layout,
-    redirect: '/nested/menu1',
-    name: 'Nested',
-    meta: {
-      title: 'Nested',
-      icon: 'nested'
-    },
+    redirect: '/feedback/check',
     children: [
       {
-        path: 'menu1',
-        component: () => import('@/views/nested/menu1/index'), // Parent router-view
-        name: 'Menu1',
-        meta: { title: 'Menu1', roles: ['admin', 'user'] },
-        children: [
-          {
-            path: 'menu1-1',
-            component: () => import('@/views/nested/menu1/menu1-1'),
-            name: 'Menu1-1',
-            meta: { title: 'Menu1-1' }
-          },
-          {
-            path: 'menu1-2',
-            component: () => import('@/views/nested/menu1/menu1-2'),
-            name: 'Menu1-2',
-            meta: { title: 'Menu1-2' },
-            children: [
-              {
-                path: 'menu1-2-1',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
-                name: 'Menu1-2-1',
-                meta: { title: 'Menu1-2-1' }
-              },
-              {
-                path: 'menu1-2-2',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
-                name: 'Menu1-2-2',
-                meta: { title: 'Menu1-2-2' }
-              }
-            ]
-          },
-          {
-            path: 'menu1-3',
-            component: () => import('@/views/nested/menu1/menu1-3'),
-            name: 'Menu1-3',
-            meta: { title: 'Menu1-3' }
-          }
-        ]
-      },
-      {
-        path: 'menu2',
-        component: () => import('@/views/nested/menu2/index'),
-        name: 'Menu2',
-        meta: { title: 'menu2' }
-      }
-    ]
-  },
-
-  {
-    path: 'external-link',
-    component: Layout,
-    children: [
-      {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: 'External Link', icon: 'link', roles: ['admin', 'user'] }
+        path: 'check',
+        name: 'feedbackCheck',
+        component: () => import('@/views/table/complex-table'),
+        meta: { title: '举报审核', icon: 'form', role: 'admin' }
       }
     ]
   }
-
 ]
 
 export const userRoutes = [
@@ -194,33 +137,47 @@ export const userRoutes = [
       {
         path: 'complex-table',
         component: () => import('@/views/table/complex-table'),
-        name: 'ComplexTable',
-        meta: { title: 'Complex Table' }
+        name: 'compleTable',
+        meta: { title: '已上传论文', icon: 'el-icon-s-help' }
       },
       {
         path: 'tree',
         name: 'downloadedPapers',
-        component: () => import('@/views/table/index'),
-        meta: { title: '已下载论文', icon: 'tree', role: 'user' }
+        component: () => import('@/views/tab/index'),
+        meta: { title: '已购 / 收藏 / 举报', icon: 'tree', role: 'user' }
       }
     ]
   },
   {
-    path: '/upload',
+    path: '/api',
     component: Layout,
     redirect: '/papers/upload',
     name: 'uploadForm',
     meta: { title: '上传论文', icon: 'el-icon-s-help', role: 'user' },
     children: [
       {
-        path: 'table',
+        path: 'upload',
         name: 'uploadedPapers',
         component: () => import('@/views/upload/index'),
         meta: { title: '上传', icon: 'form', role: 'user' }
       }
     ]
+  },
+  {
+    path: '/information',
+    component: Layout,
+    redirect: '/user/information',
+    name: 'information',
+    meta: { title: '用户信息', icon: 'el-icon-s-help', role: 'user' },
+    children: [
+      {
+        path: 'update',
+        name: 'informationUpdate',
+        component: () => import('@/views/userInformation/index'),
+        meta: { title: '用户信息', icon: 'form', role: 'user' }
+      }
+    ]
   }
-
 ]
 
 const createRouter = () => new Router({

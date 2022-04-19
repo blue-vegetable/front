@@ -8,6 +8,7 @@ function produceNewsData() {
     const newNewsObject = {
       //  Random.ctitle( min, max) 随机产生一个中文标题，长度默认在3-7之间
       id: Random.id(),
+      url: '/paperProfile?id' + this.id,
       rate: Random.integer(1, 5),
       name: Random.ctitle(),
       writer: Random.word(),
@@ -23,3 +24,4 @@ function produceNewsData() {
 }
 
 Mock.mock('http://localhost:12000/feedback/all', produceNewsData)
+Mock.mock('http://localhost:12000/paper/getLatest', produceNewsData)

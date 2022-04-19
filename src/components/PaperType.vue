@@ -1,12 +1,12 @@
 <template>
   <div id="app">
     <el-row :gutter="20">
-      <el-col v-for="(item,index) in detailTypes" :key="index" :types="types" :span="8">
-        <el-card shadow="hover" style="height:200px;margin-bottom:10px">
-          <div style="text-align:center;font-size:32px;position:relative;top:-15px">{{ types[index] }}</div>
+      <div v-for="(item,index) in detailTypes" :key="index" :types="types" :span="8">
+        <el-card shadow="hover" style="margin-bottom:10px;text-align:right">
+          <div style="text-align:right;font-size:32px;position:relative;top:-15px;left:-16px">{{ types[index] }}</div>
           <el-link v-for="(littleType,index2) in item" :key="index2" style="margin-bottom:20px;margin-right:20px">{{ littleType }}</el-link>
         </el-card>
-      </el-col>
+      </div>
     </el-row>
   </div>
 </template>
@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  name: 'PaperTable',
+  name: 'PaperType',
   data() {
     return {
       types: ['文', '法', '理', '工', '农', '医'],
