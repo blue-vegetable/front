@@ -1,12 +1,12 @@
 <template>
   <div>
     <div v-for="(comment, index) in comments" :id="'comment' + index" :key="index">
-      <el-link><router-link class="commentWriter" :to="{ path: '/writerProfile', query: { id: comment.writer }}">{{ comment.writer }}</router-link></el-link>
+      <el-link><router-link class="commentWriter" :to="{ path: '/writerProfile', query: { id: comment.writer }}">作者 : {{ comment.writer }}</router-link></el-link>
       <br>
-      <div class="commentContent">{{ comment.content }}</div>
+      <div class="commentContent">内容 : {{ comment.content }}</div>
       <br>
       <div class="commentRate">
-        评分：{{ comment.rate }} <br> 评论时间 : {{ comment.time }}
+        评分 :  {{ comment.rate }} <br> 评论时间 : {{ comment.time }}
       </div>
       <br>
       <el-divider />

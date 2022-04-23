@@ -16,18 +16,20 @@
         </el-card>
         <PaperButton />
         <br />
-        <PaperComment />
-        <br />
-      
-        <CommentMiddle/>
-      
-        <br />
+  <br />
         <el-row>
-          <br />
-          <el-col :offset="22" :span="1">
-            <el-button type="success">评论</el-button>
+          <el-col :offset="0" :span="4">
+             <el-button type="primary" round>评论</el-button>
+          </el-col>
+          <el-col :offset="16" :span="4">
+            <PaperComment />
           </el-col>
         </el-row>
+        <el-divider></el-divider>
+        <br />
+
+        <CommentMiddle />
+        <br />
       </el-col>
     </el-row>
   </div>
@@ -43,7 +45,6 @@ import ResultNavBar from "@/components/ResultNavBar.vue";
 
 export default {
   name: "PaperProfile",
-
   components: {
     PaperTitle,
     PaperButton,
@@ -57,9 +58,10 @@ export default {
 
 <style>
 p {
-  font-family: "Helvetica Neue";
+  font-family: "PingFang SC";
   text-align: justify;
   color: rgb(94, 91, 91);
 }
+
 </style>
 
