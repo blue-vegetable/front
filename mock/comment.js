@@ -14,7 +14,11 @@ function produceNewsData2() {
       content: Random.cparagraph(),
       // Random.date()指示生成的日期字符串的格式,默认为yyyy-MM-dd
       time: Random.date()
+<<<<<<< HEAD
      
+=======
+
+>>>>>>> e4ea0b7c47c840dbe1b7434eee36f8463172e6d2
     }
     comments.push(newNewsObject)
   }
@@ -22,6 +26,4 @@ function produceNewsData2() {
 }
 
 Mock.mock('http://localhost:12000/feedback/comment', produceNewsData2)
-
-
 

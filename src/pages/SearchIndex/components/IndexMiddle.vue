@@ -44,7 +44,7 @@ export default {
   },
   methods: {
     getPaper() {
-      this.$axios.get('http://localhost:12000/feedback/all')
+      this.$axios.get('http://localhost:12000/paper/getLatest')
         .then(response => (this.papers = response.data))
         .catch(error => console.log(error))
     }

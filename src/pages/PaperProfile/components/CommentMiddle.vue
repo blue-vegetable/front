@@ -39,10 +39,13 @@ export default {
 
   mounted() {
     this.$axios.get('http://localhost:12000/feedback/comment')
-      .then(response => (this.comments = response.data))
+      .then(response => {
+        this.comments = response.data
+        console.log(this.comments)
+      }
+      )
       .catch(error => console.log(error))
-        console.log('here',this.comments,'123')
-        this.getcomment()
+    this.getcomment()
   },
   methods: {
     getcomment() {

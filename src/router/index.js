@@ -128,6 +128,21 @@ export const adminRoutes = [
 
 export const userRoutes = [
   {
+    path: '/message',
+    component: Layout,
+    redirect: '/user/message',
+    name: 'message',
+    meta: { title: '收信箱', icon: 'el-icon-s-help', role: 'user' },
+    children: [
+      {
+        path: 'message',
+        name: 'userMessage',
+        component: () => import('@/views/table/index'),
+        meta: { title: '收信箱', icon: 'form', role: 'user' }
+      }
+    ]
+  },
+  {
     path: '/papers',
     component: Layout,
     redirect: '/papers/uploadedPapers',
@@ -178,6 +193,7 @@ export const userRoutes = [
       }
     ]
   }
+
 ]
 
 const createRouter = () => new Router({

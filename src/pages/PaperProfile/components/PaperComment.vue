@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <div>
     <!--点后弹出弹窗-->
     <el-form :inline="true">
@@ -22,6 +23,16 @@
     :colors="colors">
   </el-rate>
 </div>
+=======
+
+  <el-input
+    v-model="textarea"
+    type="textarea"
+    placeholder="请输入内容"
+    maxlength="100"
+    show-word-limit
+  />
+>>>>>>> e4ea0b7c47c840dbe1b7434eee36f8463172e6d2
 
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>

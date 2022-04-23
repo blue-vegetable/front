@@ -1,14 +1,14 @@
 <template>
   <div>
     <div v-for="(paper, index) in papers" :id="'paper' + index" :key="index">
-      <el-link type="primary"><router-link class="paperName" :to="{ path: '/paperProfile', query: { id: paper.id }}">{{ paper.name }}</router-link></el-link>
+      <el-link type="primary"><router-link class="paperName" :to="{ path: '/paperProfile', query: { id: paper.id }}">{{ paper.paperName }}</router-link></el-link>
       <br><br>
-      <el-link><router-link class="paperWriter" :to="{ path: '/writerProfile', query: { id: paper.writer }}">{{ paper.writer }}</router-link></el-link>
+      <el-link><router-link class="paperWriter" :to="{ path: '/writerProfile', query: { id: paper.writerId }}">{{ paper.writerName }}</router-link></el-link>
       <br>
-      <div class="paperAbstract">{{ paper.abstract }}</div>
+      <div class="paperAbstract">{{ paper.summary }}</div>
       <br>
       <div class="paperRate">
-        用户评分：{{ paper.rate }} <br> 上传时间 : {{ paper.time }}
+        用户评分：{{ paper.star }} <br> 上传时间 : {{ paper.time }}
       </div>
       <br>
       <el-row>
@@ -60,15 +60,11 @@ export default {
     }
   },
   mounted() {
-    this.$axios.get('http://localhost:12000/feedback/all')
-      .then(response => (this.papers = response.data))
-      .catch(error => console.log(error))
-    console.log(this.year, this.input, this.select)
     this.getPaper()
   },
   methods: {
     getPaper() {
-      this.$axios.get('http://localhost:12000/feedback/all')
+      this.$axios.get('http://localhost:12000/paper/all')
         .then(response => (this.papers = response.data))
         .catch(error => console.log(error))
     }

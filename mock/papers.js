@@ -24,4 +24,4 @@ function produceNewsData() {
 }
 
 Mock.mock('http://localhost:12000/feedback/all', produceNewsData)
-Mock.mock('http://localhost:12000/paper/getLatest', produceNewsData)
+// Mock.mock('http://localhost:12000/paper/getLatest', produceNewsData)
