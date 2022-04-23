@@ -1,13 +1,12 @@
 <template>
-    
-<el-input
-  type="textarea"
-  placeholder="请输入内容"
-  v-model="textarea"
-  maxlength="100"
-  show-word-limit
->
-</el-input>
+
+  <el-input
+    v-model="textarea"
+    type="textarea"
+    placeholder="请输入内容"
+    maxlength="100"
+    show-word-limit
+  />
 
 </template>
 

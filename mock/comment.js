@@ -13,8 +13,8 @@ function produceNewsData2() {
       // Random.cparagraph(min, max) 随机生成一个中文段落，段落里的句子个数默认3-7个
       content: Random.cparagraph(),
       // Random.date()指示生成的日期字符串的格式,默认为yyyy-MM-dd
-      time: Random.date(),
-     
+      time: Random.date()
+
     }
     comments.push(newNewsObject)
   }
@@ -22,6 +22,4 @@ function produceNewsData2() {
 }
 
 Mock.mock('http://localhost:12000/feedback/comment', produceNewsData2)
-
-
 

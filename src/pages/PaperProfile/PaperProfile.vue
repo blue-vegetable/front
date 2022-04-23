@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <ResultNavBar />
-    <br />
+    <br>
     <PaperTitle />
     <el-row>
       <!-- 这个el-row为了限制card的大小, 使其占中间位置 -->
@@ -12,18 +12,18 @@
               <PaperMiddle />
             </el-col>
           </el-row>
-          <br />
+          <br>
         </el-card>
         <PaperButton />
-        <br />
+        <br>
         <PaperComment />
-        <br />
-      
-        <CommentMiddle/>
-      
-        <br />
+        <br>
+
+        <CommentMiddle />
+
+        <br>
         <el-row>
-          <br />
+          <br>
           <el-col :offset="22" :span="1">
             <el-button type="success">评论</el-button>
           </el-col>
@@ -34,15 +34,15 @@
 </template>
 
 <script>
-import PaperTitle from "./components/PaperTitle.vue";
-import PaperButton from "./components/PaperButton.vue";
-import PaperMiddle from "./components/PaperMiddle.vue";
-import PaperComment from "./components/PaperComment.vue";
-import CommentMiddle from "./components/CommentMiddle.vue";
-import ResultNavBar from "@/components/ResultNavBar.vue";
+import PaperTitle from './components/PaperTitle.vue'
+import PaperButton from './components/PaperButton.vue'
+import PaperMiddle from './components/PaperMiddle.vue'
+import PaperComment from './components/PaperComment.vue'
+import CommentMiddle from './components/CommentMiddle.vue'
+import ResultNavBar from '@/components/ResultNavBar.vue'
 
 export default {
-  name: "PaperProfile",
+  name: 'PaperProfile',
 
   components: {
     PaperTitle,
@@ -50,9 +50,9 @@ export default {
     PaperComment,
     ResultNavBar,
     CommentMiddle,
-    PaperMiddle,
-  },
-};
+    PaperMiddle
+  }
+}
 </script>
 
 <style>

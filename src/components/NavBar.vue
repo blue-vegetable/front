@@ -14,9 +14,9 @@
       >网站首页</el-menu-item>
 
       <div style="display: flex; justify-content: flex-end">
-        <el-menu-item index="4">
-          <el-badge :value="12" class="item">
-            <a style="margin-top:-15px" class="el-icon-message" href="http://www.baidu.com" />
+        <el-menu-item index="dashboard">
+          <el-badge v-if="logOrNot" :value="0" class="item">
+            <a style="margin-top:-15px" class="el-icon-message" />
           </el-badge>
         </el-menu-item>
         <el-menu-item index="5">
@@ -157,18 +157,20 @@ export default {
         })
     },
     handleRegister() {
+      console.log('register here')
       this.password_md5 = md5(this.password_signup)
-      this.$axios.post('http://localhost:12000/user/register', {
-        username: this.userid_signup,
-        password: this.password_md5
-      })
-        .then(function(resp) {
-          console.log(resp.data)
+      this.$store.dispatch('user/register', { 'username': this.userid_signup, 'password': this.password_md5 })
+        .then(() => {
+          this.$message({
+            type: 'success',
+            message: `注册成功`
+          })
+          this.SignUpDialogVisible = false
         })
-        .catch(function(error) {
+        .catch((error) => {
+          this.logOrNot = false
           console.log(error)
         })
-      this.SignUpDialogVisible = false
     } // 至于是否需要完成注册后立刻自动登录，以后再说
   }
 }

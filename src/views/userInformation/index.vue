@@ -38,8 +38,14 @@
             </el-col>
           </el-row>
         </el-card>
+        <br>
+        <div style="text-align:center">
+          <el-button type="primary">修改信息</el-button>
+        </div>
+
       </el-col>
     </el-row>
+
   </div>
 </template>
 
