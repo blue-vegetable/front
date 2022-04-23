@@ -1,15 +1,15 @@
 <template>
   <div>
     <div class="paperName">
-      {{ paper.name }}
+      {{ paper.paperName }}
     </div>
     <br><br>
-    <el-link><router-link class="paperWriter" :to="{ path: '/writerProfile', query: { id: paper.writer }}">作者：{{ paper.writer }}</router-link></el-link>
+    <el-link><router-link class="paperWriter" :to="{ path: '/writerProfile', query: { id: paper.writerId }}">作者：{{ paper.writerName }}</router-link></el-link>
     <br><br>
-    <div class="paperAbstract">摘要：{{ paper.abstract }}</div>
+    <div class="paperAbstract">摘要：{{ paper.summary }}</div>
     <br>
     <div class="paperYinyongliang">
-      引用量：{{ paper.yinyongliang }}
+      下载量：{{ paper.downloads }}
     </div>
     <br>
     <div class="tag-group">
@@ -29,7 +29,7 @@
       </el-col>
 
       <el-col :offset="3" :span="2">
-        <el-badge :value="paper.likenum" class="item" type="primary">
+        <el-badge :value="likenum" class="item" type="primary">
           <el-button size="small" @click="like">喜欢</el-button>
         </el-badge>
       </el-col>
@@ -66,28 +66,31 @@
 <script>
 export default {
   name: 'PaperMiddle',
-
+  props: ['id'],
   data() {
     return {
-      paper: ''
-
+      paper: '',
+      likenum: 11
     }
   },
 
   mounted() {
-    this.$axios.get('http://localhost:12000/feedback/paper')
-      .then(response => (this.paper = response.data))
-      .catch(error => console.log(error))
+    this.getPaper()
   },
 
   methods: {
     getPaper() {
-      this.$axios.get('http://localhost:12000/feedback/paper')
-        .then(response => (this.paper = response.data))
+      this.$axios.get('http://localhost:12000/paper/getPaper?paperId=' + this.id)
+        .then(response => {
+          this.paper = response.data
+          this.paper.keywords = (this.paper.keywords).split('，')
+          console.log(this.paper)
+        })
         .catch(error => console.log(error))
     },
     like() {
-      this.paper.likenum++
+      this.likenum++
+      console('123')
     }
   }
 

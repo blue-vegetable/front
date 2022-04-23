@@ -43,8 +43,8 @@ export default {
   data() {
     return {
       year: '',
-      hereInput: this.select,
-      hereSelect: this.input
+      hereInput: this.input,
+      hereSelect: this.select
     }
   },
   mounted() {
@@ -63,6 +63,7 @@ export default {
     searchFromNav(data) {
       this.hereInput = data.input
       this.hereSelect = data.select
+      console.log(this.hereInput, this.hereSelect)
     }
   }
 }

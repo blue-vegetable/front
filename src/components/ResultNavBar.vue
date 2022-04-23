@@ -127,6 +127,7 @@ export default {
   },
   methods: {
     search(select, input) {
+      console.log(select, input)
       this.$emit('navSearch', { 'select': select, 'input': input })
     },
     handleSelect(key, keyPath) {

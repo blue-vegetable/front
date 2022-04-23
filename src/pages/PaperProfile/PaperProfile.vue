@@ -9,41 +9,27 @@
         <el-card class="box-card">
           <el-row>
             <el-col :span="24">
-              <PaperMiddle />
+              <PaperMiddle :id="id" />
             </el-col>
           </el-row>
           <br>
         </el-card>
         <PaperButton />
-<<<<<<< HEAD
-        <br />
-  <br />
+        <br>
+        <br>
         <el-row>
           <el-col :offset="0" :span="4">
-             <el-button type="primary" round>评论</el-button>
+            <el-button type="primary" round>评论</el-button>
           </el-col>
           <el-col :offset="16" :span="4">
             <PaperComment />
-=======
-        <br>
-        <PaperComment />
-        <br>
-
-        <CommentMiddle />
-
-        <br>
-        <el-row>
-          <br>
-          <el-col :offset="22" :span="1">
-            <el-button type="success">评论</el-button>
->>>>>>> e4ea0b7c47c840dbe1b7434eee36f8463172e6d2
           </el-col>
         </el-row>
-        <el-divider></el-divider>
-        <br />
+        <el-divider />
+        <br>
 
         <CommentMiddle />
-        <br />
+        <br>
       </el-col>
     </el-row>
   </div>
@@ -58,12 +44,9 @@ import CommentMiddle from './components/CommentMiddle.vue'
 import ResultNavBar from '@/components/ResultNavBar.vue'
 
 export default {
-<<<<<<< HEAD
-  name: "PaperProfile",
-=======
+
   name: 'PaperProfile',
 
->>>>>>> e4ea0b7c47c840dbe1b7434eee36f8463172e6d2
   components: {
     PaperTitle,
     PaperButton,
@@ -71,6 +54,14 @@ export default {
     ResultNavBar,
     CommentMiddle,
     PaperMiddle
+  },
+  data() {
+    return {
+      id: this.$route.query.id
+    }
+  },
+  mounted() {
+    console.log(this.$route.query.id)
   }
 }
 </script>

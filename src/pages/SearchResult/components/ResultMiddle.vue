@@ -60,11 +60,14 @@ export default {
     }
   },
   mounted() {
-    this.getPaper()
   },
   methods: {
     getPaper() {
-      this.$axios.get('http://localhost:12000/paper/all')
+      this.$axios.post('http://localhost:12000/paper/searchPaper', {
+        writerName: this.select === '2' ? this.input : '',
+        paperName: this.select === '1' ? this.input : '',
+        keyword: ''
+      })
         .then(response => (this.papers = response.data))
         .catch(error => console.log(error))
     }

@@ -62,7 +62,7 @@
           <div v-for="(item, index) in latestPapers" :key="index">
             <span style="color: grey">{{ index + 1 +' ' }}</span>
             <el-link :href="item.url" target="_blank">{{
-              item.name
+              item.paperName
             }}</el-link>
             <br>
           </div>
