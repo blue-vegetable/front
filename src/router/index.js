@@ -69,6 +69,15 @@ export const constantRoutes = [
     props: true
   },
   {
+    path: '/registration',
+    component: () => import('@/pages/Registration/Registration'),
+    hidden: true,
+    name: 'registration',
+    meta: {
+      title: '注册'
+    }
+  },
+  {
     path: '/login',
     component: () => import('@/views/login/index'),
     hidden: true

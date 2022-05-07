@@ -1,70 +1,6 @@
 <template>
-  <div>
-    <el-menu
-      :default-active="$route.path"
-      mode="horizontal"
-      router
-      @select="handleSelect"
-    >
-      <!-- text-color=#ffffff
-    background-color=#409eff
-    active-text-color=#ffffff -->
-      <el-menu-item
-        index="/searchIndex"
-      >网站首页</el-menu-item>
-
-      <div style="display: flex; justify-content: flex-end">
-        <el-menu-item index="dashboard">
-          <el-badge v-if="logOrNot" :value="0" class="item">
-            <a style="margin-top:-15px" class="el-icon-message" />
-          </el-badge>
-        </el-menu-item>
-        <el-menu-item index="5">
-          <el-dropdown @command="handleDropdown">
-            <span style="height:100%">
-              个人中心
-            </span>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item v-if="!logOrNot" command="1" icon="el-icon-user"><el-button type="text" @click="centerDialogVisible = true">登录</el-button></el-dropdown-item>
-              <el-dropdown-item v-if="!logOrNot" command="2" icon="el-icon-s-order"><el-button type="text" @click="SignUpDialogVisible = true">注册</el-button></el-dropdown-item>
-              <el-dropdown-item v-if="logOrNot" command="3" icon="el-icon-s-fold">我的论文</el-dropdown-item>
-              <el-dropdown-item v-if="logOrNot" command="4" icon="el-icon-message">我的消息</el-dropdown-item>
-              <el-dropdown-item v-if="logOrNot" command="5" icon="el-icon-cpu">控制台</el-dropdown-item>
-              <el-dropdown-item v-if="logOrNot" command="6" icon="el-icon-s-promotion">退出登录</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
-        </el-menu-item>
-      </div>
-    </el-menu>
-    <!-- 下面是登录弹窗，为减少组件传参故直接放于此NavBar中 -->
-    <el-dialog
-      title="登录"
-      :visible.sync="centerDialogVisible"
-      width="30%"
-      center
-    >
-      <el-form label-position="right" label-width="60px">
-        <el-form-item label="帐号">
-          <el-input v-model="userid_login" type="text" />
-        </el-form-item>
-        <el-form-item label="密码">
-          <el-input v-model="password_login" type="password" />
-        </el-form-item>
-      </el-form>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="centerDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="handleLogin">登 录</el-button>
-      </span>
-    </el-dialog>
-    <!-- 下面是注册弹窗，为减少组件传参故直接放于此NavBar中 -->
-    <el-dialog
-      title="注册"
-      :visible.sync="SignUpDialogVisible"
-      width="70%"
-      center
-    >
-    <el-row>
-    <el-col :offset="4" :span="16">
+  <el-row>
+    <el-col :offset="6" :span="16">
           <div class="stepContent">
             <el-col :offset="0" :span="24">
               <el-steps
@@ -250,7 +186,7 @@
                     <el-col :offset="0" :span="2">
                       <el-button type="info">工</el-button>
                     </el-col>
-                    <el-col :offset="1" :span="2">
+                    <el-col :offset="1" :span="3">
                       <el-checkbox-button
                         label="计算机"
                         size="small"
@@ -339,7 +275,7 @@
                         size="small"
                       ></el-checkbox-button>
                     </el-col>
-                    <el-col :offset="1" :span="2">
+                    <el-col :offset="2" :span="2">
                       <el-checkbox-button
                         label="临床医学"
                         size="small"
@@ -372,35 +308,22 @@
              <br>
                 <br>
           <div>
-
-<el-col :offset="20" :span="2">
+            <el-button @click="skipTo('pre')" v-if="stepIndex > 1"
+              >上一步</el-button
+            >
             <el-button @click="skipTo('next')" v-if="stepIndex < 3"
               >下一步</el-button
             >
-
-            <el-button v-if="stepIndex > 2" @click="SignUpDialogVisible = false">完成</el-button>
-    </el-col>
+            <el-button v-if="stepIndex > 2">完成</el-button>
           </div>
     </el-col>
   </el-row>
-    </el-dialog>
-  </div>
 </template>
-
-<style>
-.item {
-  margin-top: 10px;
-}
-</style>>
-
 <script>
-import md5 from 'js-md5'
-import store from '@/store'
-
 export default {
-  name: 'NavBar',
+  name: "",
   data() {
-    var validatePwd2 = (rule, value, callback) => {
+    		var validatePwd2 = (rule, value, callback) => {
 				if (value === '') {
 					callback(new Error('请再次输入密码'))
 				} else if (value !== this.ruleForm.pwd1) {
@@ -409,6 +332,7 @@ export default {
 					callback()
 				}
 			}
+
     return {
       checkList: [ ],
       stepData: [{ title: "步骤一" }, { title: "步骤二" }, { title: "完成" }],
@@ -432,62 +356,10 @@ export default {
           { required: false, message: "请输入电话", trigger: "blur" },
         ],
       },
-      userid_login: '',
-      password_login: '',
-      logOrNot: false,
-      centerDialogVisible: false,
-      SignUpDialogVisible: false
-    }
+    };
   },
-  mounted() { // 在mount时判断用户是否登录
-    if (store.getters.role) {
-      console.log()
-      this.logOrNot = true
-    }
-  },
+
   methods: {
-    handleSelect(key, keyPath) {
-    },
-    handleDropdown(type) {
-      if (type === '3') { // 我的论文
-        this.$router.push('/papers')
-      }
-      if (type === '4') { // 我的消息
-        this.$router.push('/message')
-      }
-      if (type === '5') { // 控制台
-        this.$router.push('/userCenter')
-      }
-      if (type === '6') { // 退出登录
-        store.dispatch('user/logout')
-        this.logOrNot = false
-        this.$message({
-          type: 'success',
-          message: `注销成功`
-        })
-      }
-    },
-    handleLogin() {
-      this.password_md5 = md5(this.password_login)
-      this.$store.dispatch('user/login', { 'username': this.userid_login, 'password': this.password_md5 })
-      // this.$axios.post('/vue-admin-template/user/login', {
-      //   username: this.userid_login,
-      //   password: this.password_md5
-      // })
-        .then(() => {
-          this.logOrNot = true
-          this.centerDialogVisible = false
-          this.$message({
-            type: 'success',
-            message: `登录成功`
-          })
-          this.logOrNot = true
-        })
-        .catch((error) => {
-          this.logOrNot = false
-          console.log(error)
-        })
-    },
     skipTo(type) {
       if (type == "pre") {
         if (this.stepIndex == 1) return;
@@ -496,6 +368,21 @@ export default {
         this.stepIndex++;
       }
     },
-  }
-}
+  },
+  mounted() {
+    this.test();
+    var a = [
+      { id: "1", item: "苹果" },
+      { id: "1", item: "苹果" },
+      { id: "1", item: "果" },
+      { id: "1", item: "1" },
+    ];
+    if (!this.isSomeEqual(a, "item")) {
+      console.log("重复");
+    }
+  },
+};
 </script>
+
+
+
