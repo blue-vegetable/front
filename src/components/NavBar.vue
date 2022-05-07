@@ -456,7 +456,7 @@ export default {
         this.$router.push('/message')
       }
       if (type === '5') { // 控制台
-        this.$router.push('/userCenter')
+        this.$router.push('/')
       }
       if (type === '6') { // 退出登录
         store.dispatch('user/logout')

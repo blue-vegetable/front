@@ -80,10 +80,10 @@ export default {
 
   methods: {
     getPaper() {
-      this.$axios.get('http://localhost:12000/paper/getPaper?paperId=' + this.id)
+      this.$axios.get('http://124.220.30.8:12000/paper/getPaper?paperId=' + this.id)
         .then(response => {
           this.paper = response.data
-          this.paper.keywords = (this.paper.keywords).split('，')
+          this.paper.keywords = (this.paper.keywords).split(';')
           console.log(this.paper)
         })
         .catch(error => console.log(error))

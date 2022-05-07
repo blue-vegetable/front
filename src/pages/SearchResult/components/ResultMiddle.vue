@@ -40,15 +40,21 @@
 <script>
 export default {
   name: 'ResultMiddle',
-  props: ['input', 'select', 'year'],
   data() {
     return {
       keyword: '',
       field: '',
-      papers: ''
+      papers: '',
+      input: this.$route.query.input,
+      select: this.$route.query.select,
+      year: ''
     }
   },
   watch: {
+    $route(to, from) {
+      this.input = this.$route.query.input
+      this.select = this.$route.query.select
+    },
     year: function() {
       this.getPaper()
     },
@@ -60,14 +66,17 @@ export default {
     }
   },
   mounted() {
+    this.getPaper()
   },
   methods: {
     getPaper() {
-      this.$axios.post('http://localhost:12000/paper/searchPaper', {
-        writerName: this.select === '2' ? this.input : '',
-        paperName: this.select === '1' ? this.input : '',
-        keyword: ''
-      })
+      let writerName = ''; let paperName = ''
+      if (this.select === '2') {
+        writerName = this.input
+      } else if (this.select === '1') {
+        paperName = this.input
+      }
+      this.$axios.get('http://124.220.30.8:12000/paper/searchPaper?writerName=' + writerName + '&paperName=' + paperName + '&keywords=' + this.keyword + '&time=' + this.year)
         .then(response => (this.papers = response.data))
         .catch(error => console.log(error))
     }
