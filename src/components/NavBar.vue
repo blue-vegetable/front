@@ -114,7 +114,7 @@
                 <br />
                 <br />
                 <el-row>
-                  <el-checkbox-group v-model="checkList">
+                  <el-checkbox-group v-model="checkList1">
                     <el-col :offset="0" :span="2">
                       <el-button type="primary">文</el-button>
                     </el-col>
@@ -158,7 +158,7 @@
                 </el-row>
                 <br />
                 <el-row>
-                   <el-checkbox-group v-model="checkList">
+                   <el-checkbox-group v-model="checkList2">
                     <el-col :offset="0" :span="2">
                       <el-button>法</el-button>
                     </el-col>
@@ -202,7 +202,7 @@
                 </el-row>
                 <br />
                 <el-row>
-                  <el-checkbox-group v-model="checkList">
+                  <el-checkbox-group v-model="checkList3">
                     <el-col :offset="0" :span="2">
                       <el-button type="success">理</el-button>
                     </el-col>
@@ -246,7 +246,7 @@
                 </el-row>
                 <br />
                 <el-row>
-                   <el-checkbox-group v-model="checkList">
+                   <el-checkbox-group v-model="checkList4">
                     <el-col :offset="0" :span="2">
                       <el-button type="info">工</el-button>
                     </el-col>
@@ -290,7 +290,7 @@
                 </el-row>
                 <br />
                 <el-row>
-                    <el-checkbox-group v-model="checkList">
+                    <el-checkbox-group v-model="checkList5">
                     <el-col :offset="0" :span="2">
                       <el-button type="warning">农</el-button>
                     </el-col>
@@ -329,7 +329,7 @@
                 </el-row>
                 <br />
                 <el-row>
-                  <el-checkbox-group v-model="checkList">
+                  <el-checkbox-group v-model="checkList6">
                     <el-col :offset="0" :span="2">
                       <el-button type="danger">医</el-button>
                     </el-col>
@@ -372,14 +372,13 @@
              <br>
                 <br>
           <div>
-
-<el-col :offset="20" :span="2">
+             <el-button @click="skipTo('pre')" v-if="stepIndex > 1"
+              >上一步</el-button
+            >
             <el-button @click="skipTo('next')" v-if="stepIndex < 3"
               >下一步</el-button
             >
-
-            <el-button v-if="stepIndex > 2" @click="SignUpDialogVisible = false">完成</el-button>
-    </el-col>
+            <el-button v-if="stepIndex > 2" @click="handleRegister">完成</el-button>
           </div>
     </el-col>
   </el-row>
@@ -410,7 +409,13 @@ export default {
 				}
 			}
     return {
-      checkList: [ ],
+      checkList1: [ ],
+      checkList2: [ ],
+      checkList3: [ ],
+      checkList4: [ ],
+      checkList5: [ ],
+      checkList6: [ ],
+
       stepData: [{ title: "步骤一" }, { title: "步骤二" }, { title: "完成" }],
       stepIndex: 1,
       ruleForm: {
@@ -474,7 +479,7 @@ export default {
       //   username: this.userid_login,
       //   password: this.password_md5
       // })
-        .then(() => {
+        .then((res) => {
           this.logOrNot = true
           this.centerDialogVisible = false
           this.$message({
@@ -488,6 +493,27 @@ export default {
           console.log(error)
         })
     },
+    handleRegister() {
+      console.log('register here')
+      this.password_md5 = md5(this.ruleForm.pwd1)
+      this.$axios.post('http://124.220.30.8:12000/user/register', {
+            username: this.ruleForm.name,
+            password: this.ruleForm.pwd1,
+            classification:[this.checkList1.join(' '),this.checkList2.join( ),this.checkList3.join(' '),this.checkList4.join(' '),this.checkList5.join(' '),this.checkList6.join(' ')]
+       })
+        .then((response) => {
+          this.$message({
+            type: 'success',
+            message: '注册成功'
+          })
+          this.SignUpDialogVisible = false
+
+        })
+        .catch((error) => {
+          this.logOrNot = false
+          console.log(error)
+        })
+    } ,// 至于是否需要完成注册后立刻自动登录，以后再说
     skipTo(type) {
       if (type == "pre") {
         if (this.stepIndex == 1) return;
@@ -499,3 +525,4 @@ export default {
   }
 }
 </script>
+
