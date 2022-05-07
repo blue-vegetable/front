@@ -39,12 +39,11 @@ export default {
     ResultMiddle,
     ResultRight
   },
-  props: ['select', 'input'],
   data() {
     return {
       year: '',
-      hereInput: this.input,
-      hereSelect: this.select
+      hereInput: this.$route.query.input,
+      hereSelect: this.$route.query.select
     }
   },
   mounted() {
@@ -63,7 +62,13 @@ export default {
     searchFromNav(data) {
       this.hereInput = data.input
       this.hereSelect = data.select
-      console.log(this.hereInput, this.hereSelect)
+      this.$router.replace({
+        name: 'searchResult',
+        query: {
+          input: data.input,
+          select: data.select
+        }
+      })
     }
   }
 }

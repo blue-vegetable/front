@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function login(data) {
   return request({
-    url: 'http://localhost:12000/user/login',
+    url: 'http://124.220.30.8:12000/user/login',
     method: 'post',
     data
   })
@@ -10,7 +10,7 @@ export function login(data) {
 
 export function register(data) {
   return request({
-    url: 'http://localhost:12000/user/register/',
+    url: 'http://124.220.30.8:12000/user/register/',
     method: 'post',
     data
   })

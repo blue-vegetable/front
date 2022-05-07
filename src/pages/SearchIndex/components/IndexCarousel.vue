@@ -3,12 +3,11 @@
     <!-- <span class="demonstration">默认 Hover 指示器触发</span> -->
     <el-carousel height="150px">
       <el-carousel-item v-for="(picture,index) in pictures" :key="index">
-        <el-image :src="picture"></el-image>
+        <el-image :src="picture" />
       </el-carousel-item>
     </el-carousel>
   </div>
 </template>
-    
 <style>
 .el-carousel__item h3 {
   color: #475669;
@@ -29,11 +28,11 @@
 
 <script>
 export default {
-  name: "IndexCarousel",
+  name: 'IndexCarousel',
   data() {
     return {
-      pictures:[require('@/assets/1.jpg'),require('@/assets/2.jpg'),require('@/assets/3.jpg'),require('@/assets/4.jpg')]
-    };
-  },
-};
+      pictures: [require('@/assets/1.jpg'), require('@/assets/2.jpg'), require('@/assets/3.jpg'), require('@/assets/4.jpg')]
+    }
+  }
+}
 </script>

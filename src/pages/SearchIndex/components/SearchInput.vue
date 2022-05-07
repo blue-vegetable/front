@@ -46,7 +46,7 @@ export default {
     searchClick(select, input) {
       this.$router.push({
         name: 'searchResult',
-        params: {
+        query: {
           select: select,
           input: input
         }
