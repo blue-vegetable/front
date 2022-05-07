@@ -61,7 +61,7 @@
           </div>
           <div v-for="(item, index) in latestPapers" :key="index">
             <span style="color: grey">{{ index + 1 +' ' }}</span>
-            <el-link :href="['/paperProfile?id='+item.id]" target="_blank">{{
+            <el-link :href="'/paperProfile?id='+item.id" target="_blank">{{
               item.paperName
             }}</el-link>
             <br>
@@ -133,7 +133,6 @@ export default {
       this.$axios.get('http://124.220.30.8:12000/paper/getLatest')
         .then(response => {
           this.latestPapers = response.data
-          console.log(this.latestPapers)
         })
         .catch(error => console.log(error))
     }

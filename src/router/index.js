@@ -69,20 +69,10 @@ export const constantRoutes = [
     props: true
   },
   {
-    path: '/registration',
-    component: () => import('@/pages/Registration/Registration'),
-    hidden: true,
-    name: 'registration',
-    meta: {
-      title: '注册'
-    }
-  },
-  {
     path: '/login',
     component: () => import('@/views/login/index'),
     hidden: true
   },
-
   {
     path: '/404',
     component: () => import('@/views/404'),
@@ -201,8 +191,22 @@ export const userRoutes = [
         meta: { title: '用户信息', icon: 'form', role: 'user' }
       }
     ]
+  },
+  {
+    path: '/commentCheck',
+    component: Layout,
+    redirect: '/user/commentCheck',
+    name: 'comment',
+    meta: { title: '评论', icon: 'el-icon-s-help' },
+    children: [
+      {
+        path: 'check',
+        name: 'commentCheck',
+        component: () => import('@/views/commentCheck/index'),
+        meta: { title: '评论审核', icon: 'form' }
+      }
+    ]
   }
-
 ]
 
 const createRouter = () => new Router({
