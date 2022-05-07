@@ -18,9 +18,9 @@ export function register(data) {
 
 export function getInfo(token) {
   return request({
-    url: '/vue-admin-template/user/info',
-    method: 'get',
-    params: { token }
+    url: 'http://124.220.30.8:12000/user/getRoleSelf',
+    method: 'get'
+    // params: { token }
   })
 }
 

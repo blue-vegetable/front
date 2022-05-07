@@ -7,7 +7,7 @@ export default {
   name: 'PaperTitle',
   methods: {
     goBack() {
-      this.$router.push('/searchResult')
+      this.$router.go(-1)
     }
   }
 }

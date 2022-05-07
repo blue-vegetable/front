@@ -61,10 +61,6 @@ module.exports = [
           code: 20000,
           data: users['editor-token']
         }
-        // return {
-        //   code: 50008,
-        //   message: 'Login failed, unable to get user details.'
-        // }
       }
 
       return {

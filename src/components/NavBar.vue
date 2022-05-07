@@ -63,8 +63,8 @@
       width="70%"
       center
     >
-    <el-row>
-    <el-col :offset="4" :span="16">
+      <el-row>
+        <el-col :offset="4" :span="16">
           <div class="stepContent">
             <el-col :offset="0" :span="24">
               <el-steps
@@ -77,42 +77,42 @@
                   v-for="item in stepData"
                   :key="item.title"
                   :title="item.title"
-                ></el-step>
+                />
               </el-steps>
             </el-col>
-            <br />
-            <br />
-               <br />
+            <br>
+            <br>
+            <br>
             <el-form
+              ref="ruleForm"
               :model="ruleForm"
               :rules="rules"
-              ref="ruleForm"
               label-width="100px"
               class="demo-ruleForm"
             >
-            <br>
+              <br>
               <div v-show="stepIndex == 1">
                 <el-form-item label="账号名" prop="name">
-                  <el-input required="required" v-model="ruleForm.name"  prefix-icon="el-icon-user-solid"></el-input>
+                  <el-input v-model="ruleForm.name" required="required" prefix-icon="el-icon-user-solid" />
                 </el-form-item>
                 <el-form-item label="密码" prop="pwd1">
-                  <el-input type="password" v-model="ruleForm.pwd1" prefix-icon="el-icon-lock"></el-input>
+                  <el-input v-model="ruleForm.pwd1" type="password" prefix-icon="el-icon-lock" />
                 </el-form-item>
                 <el-form-item label="确认密码" prop="pwd2">
-                  <el-input type="password" v-model="ruleForm.pwd2" prefix-icon="el-icon-lock"></el-input>
+                  <el-input v-model="ruleForm.pwd2" type="password" prefix-icon="el-icon-lock" />
                 </el-form-item>
                 <el-form-item label="邮箱" prop="email">
-                  <el-input v-model="ruleForm.email" prefix-icon="el-icon-message"></el-input>
+                  <el-input v-model="ruleForm.email" prefix-icon="el-icon-message" />
                 </el-form-item>
                 <el-form-item label="电话号码" prop="telephone">
-                  <el-input v-model="ruleForm.telephone" prefix-icon="el-icon-mobile-phone"></el-input>
+                  <el-input v-model="ruleForm.telephone" prefix-icon="el-icon-mobile-phone" />
                 </el-form-item>
               </div>
               <div v-show="stepIndex == 2">
                 <br>
                 <h>请选择您擅长的领域:</h>
-                <br />
-                <br />
+                <br>
+                <br>
                 <el-row>
                   <el-checkbox-group v-model="checkList1">
                     <el-col :offset="0" :span="2">
@@ -122,43 +122,43 @@
                       <el-checkbox-button
                         label="文学"
                         size="small"
-                      ></el-checkbox-button>
+                      />
                     </el-col>
                     <el-col :offset="1" :span="2">
                       <el-checkbox-button
                         label="艺术"
                         size="small"
-                      ></el-checkbox-button>
+                      />
                     </el-col>
                     <el-col :offset="1" :span="2">
                       <el-checkbox-button
                         label="哲学"
                         size="small"
-                      ></el-checkbox-button>
+                      />
                     </el-col>
                     <el-col :offset="1" :span="2">
                       <el-checkbox-button
                         label="历史"
                         size="small"
-                      ></el-checkbox-button>
+                      />
                     </el-col>
                     <el-col :offset="1" :span="2">
                       <el-checkbox-button
                         label="管理"
                         size="small"
-                      ></el-checkbox-button>
+                      />
                     </el-col>
                     <el-col :offset="1" :span="2">
                       <el-checkbox-button
                         label="教育"
                         size="small"
-                      ></el-checkbox-button>
+                      />
                     </el-col>
                   </el-checkbox-group>
                 </el-row>
-                <br />
+                <br>
                 <el-row>
-                   <el-checkbox-group v-model="checkList2">
+                  <el-checkbox-group v-model="checkList2">
                     <el-col :offset="0" :span="2">
                       <el-button>法</el-button>
                     </el-col>
@@ -166,41 +166,41 @@
                       <el-checkbox-button
                         label="习惯法"
                         size="small"
-                      ></el-checkbox-button>
+                      />
                     </el-col>
                     <el-col :offset="1" :span="2">
                       <el-checkbox-button
                         label="自然法"
                         size="small"
-                      ></el-checkbox-button>
+                      />
                     </el-col>
                     <el-col :offset="1" :span="3">
                       <el-checkbox-button
                         label="法律思想"
                         size="small"
-                      ></el-checkbox-button>
+                      />
                     </el-col>
                     <el-col :offset="1" :span="3">
                       <el-checkbox-button
                         label="法经济学"
                         size="small"
-                      ></el-checkbox-button>
+                      />
                     </el-col>
                     <el-col :offset="1" :span="3">
                       <el-checkbox-button
                         label="法社会学"
                         size="small"
-                      ></el-checkbox-button>
+                      />
                     </el-col>
                     <el-col :offset="1" :span="3">
                       <el-checkbox-button
                         label="法哲学"
                         size="small"
-                      ></el-checkbox-button>
+                      />
                     </el-col>
                   </el-checkbox-group>
                 </el-row>
-                <br />
+                <br>
                 <el-row>
                   <el-checkbox-group v-model="checkList3">
                     <el-col :offset="0" :span="2">
@@ -210,43 +210,43 @@
                       <el-checkbox-button
                         label="生物"
                         size="small"
-                      ></el-checkbox-button>
+                      />
                     </el-col>
                     <el-col :offset="1" :span="2">
                       <el-checkbox-button
                         label="化学"
                         size="small"
-                      ></el-checkbox-button>
+                      />
                     </el-col>
                     <el-col :offset="1" :span="2">
                       <el-checkbox-button
                         label="物理"
                         size="small"
-                      ></el-checkbox-button>
+                      />
                     </el-col>
                     <el-col :offset="1" :span="2">
                       <el-checkbox-button
                         label="数学"
                         size="small"
-                      ></el-checkbox-button>
+                      />
                     </el-col>
                     <el-col :offset="1" :span="2">
                       <el-checkbox-button
                         label="天文"
                         size="small"
-                      ></el-checkbox-button>
+                      />
                     </el-col>
                     <el-col :offset="1" :span="2">
                       <el-checkbox-button
                         label="地球科学"
                         size="small"
-                      ></el-checkbox-button>
+                      />
                     </el-col>
                   </el-checkbox-group>
                 </el-row>
-                <br />
+                <br>
                 <el-row>
-                   <el-checkbox-group v-model="checkList4">
+                  <el-checkbox-group v-model="checkList4">
                     <el-col :offset="0" :span="2">
                       <el-button type="info">工</el-button>
                     </el-col>
@@ -254,43 +254,43 @@
                       <el-checkbox-button
                         label="计算机"
                         size="small"
-                      ></el-checkbox-button>
+                      />
                     </el-col>
                     <el-col :offset="1" :span="2">
                       <el-checkbox-button
                         label="电子"
                         size="small"
-                      ></el-checkbox-button>
+                      />
                     </el-col>
                     <el-col :offset="1" :span="2">
                       <el-checkbox-button
                         label="机械"
                         size="small"
-                      ></el-checkbox-button>
+                      />
                     </el-col>
                     <el-col :offset="1" :span="3">
                       <el-checkbox-button
                         label="材料科学"
                         size="small"
-                      ></el-checkbox-button>
+                      />
                     </el-col>
                     <el-col :offset="1" :span="2">
                       <el-checkbox-button
                         label="水利"
                         size="small"
-                      ></el-checkbox-button>
+                      />
                     </el-col>
                     <el-col :offset="1" :span="2">
                       <el-checkbox-button
                         label="建筑"
                         size="small"
-                      ></el-checkbox-button>
+                      />
                     </el-col>
                   </el-checkbox-group>
                 </el-row>
-                <br />
+                <br>
                 <el-row>
-                    <el-checkbox-group v-model="checkList5">
+                  <el-checkbox-group v-model="checkList5">
                     <el-col :offset="0" :span="2">
                       <el-button type="warning">农</el-button>
                     </el-col>
@@ -298,36 +298,36 @@
                       <el-checkbox-button
                         label="农业经济"
                         size="small"
-                      ></el-checkbox-button>
+                      />
                     </el-col>
                     <el-col :offset="2" :span="2">
                       <el-checkbox-button
                         label="农业工程"
                         size="small"
-                      ></el-checkbox-button>
+                      />
                     </el-col>
                     <el-col :offset="2" :span="2">
                       <el-checkbox-button
                         label="园艺"
                         size="small"
-                      ></el-checkbox-button>
+                      />
                     </el-col>
                     <el-col :offset="1" :span="2">
                       <el-checkbox-button
                         label="畜牧"
                         size="small"
-                      ></el-checkbox-button>
+                      />
                     </el-col>
                     <el-col :offset="1" :span="2">
                       <el-checkbox-button
                         label="农业基础科学"
                         size="small"
-                      ></el-checkbox-button>
+                      />
                     </el-col>
 
                   </el-checkbox-group>
                 </el-row>
-                <br />
+                <br>
                 <el-row>
                   <el-checkbox-group v-model="checkList6">
                     <el-col :offset="0" :span="2">
@@ -337,31 +337,31 @@
                       <el-checkbox-button
                         label="中医学"
                         size="small"
-                      ></el-checkbox-button>
+                      />
                     </el-col>
                     <el-col :offset="1" :span="2">
                       <el-checkbox-button
                         label="临床医学"
                         size="small"
-                      ></el-checkbox-button>
+                      />
                     </el-col>
                     <el-col :offset="2" :span="2">
                       <el-checkbox-button
                         label="基础医学"
                         size="small"
-                      ></el-checkbox-button>
+                      />
                     </el-col>
                     <el-col :offset="2" :span="2">
                       <el-checkbox-button
                         label="口腔医学"
                         size="small"
-                      ></el-checkbox-button>
+                      />
                     </el-col>
 
                   </el-checkbox-group>
                 </el-row>
-                <br />
-                <br />
+                <br>
+                <br>
               </div>
               <div v-show="stepIndex == 3">
                 <h>恭喜您注册成功！</h>
@@ -369,19 +369,21 @@
               </div>
             </el-form>
           </div>
-             <br>
-                <br>
+          <br>
+          <br>
           <div>
-             <el-button @click="skipTo('pre')" v-if="stepIndex > 1"
-              >上一步</el-button
-            >
-            <el-button @click="skipTo('next')" v-if="stepIndex < 3"
-              >下一步</el-button
-            >
+            <el-button
+              v-if="stepIndex > 1"
+              @click="skipTo('pre')"
+            >上一步</el-button>
+            <el-button
+              v-if="stepIndex < 3"
+              @click="skipTo('next')"
+            >下一步</el-button>
             <el-button v-if="stepIndex > 2" @click="handleRegister">完成</el-button>
           </div>
-    </el-col>
-  </el-row>
+        </el-col>
+      </el-row>
     </el-dialog>
   </div>
 </template>
@@ -400,42 +402,42 @@ export default {
   name: 'NavBar',
   data() {
     var validatePwd2 = (rule, value, callback) => {
-				if (value === '') {
-					callback(new Error('请再次输入密码'))
-				} else if (value !== this.ruleForm.pwd1) {
-					callback(new Error('两次输入密码不一致!'))
-				} else {
-					callback()
-				}
-			}
+      if (value === '') {
+        callback(new Error('请再次输入密码'))
+      } else if (value !== this.ruleForm.pwd1) {
+        callback(new Error('两次输入密码不一致!'))
+      } else {
+        callback()
+      }
+    }
     return {
-      checkList1: [ ],
-      checkList2: [ ],
-      checkList3: [ ],
-      checkList4: [ ],
-      checkList5: [ ],
-      checkList6: [ ],
+      checkList1: [],
+      checkList2: [],
+      checkList3: [],
+      checkList4: [],
+      checkList5: [],
+      checkList6: [],
 
-      stepData: [{ title: "步骤一" }, { title: "步骤二" }, { title: "完成" }],
+      stepData: [{ title: '步骤一' }, { title: '步骤二' }, { title: '完成' }],
       stepIndex: 1,
       ruleForm: {
-        name: "",
-        pwd1: "",
-        pwd2: "",
-        email: "",
-        telephone: "",
+        name: '',
+        pwd1: '',
+        pwd2: '',
+        email: '',
+        telephone: ''
       },
       rules: {
         name: [
-          { required: true, message: "请输入账号", trigger: "blur" },
-          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" },
+          { required: true, message: '请输入账号', trigger: 'blur' },
+          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
         ],
-        pwd1: [{ required: true, message: "请输入密码", trigger: "blur" }],
-        pwd2: [{ required: true,validator: validatePwd2, message: "两次输入密码不一致", trigger: "blur" }],
-        email: [{ required: false, message: "请输入邮箱", trigger: "blur" }],
+        pwd1: [{ required: true, message: '请输入密码', trigger: 'blur' }],
+        pwd2: [{ required: true, validator: validatePwd2, message: '两次输入密码不一致', trigger: 'blur' }],
+        email: [{ required: false, message: '请输入邮箱', trigger: 'blur' }],
         telephone: [
-          { required: false, message: "请输入电话", trigger: "blur" },
-        ],
+          { required: false, message: '请输入电话', trigger: 'blur' }
+        ]
       },
       userid_login: '',
       password_login: '',
@@ -497,31 +499,30 @@ export default {
       console.log('register here')
       this.password_md5 = md5(this.ruleForm.pwd1)
       this.$axios.post('http://124.220.30.8:12000/user/register', {
-            username: this.ruleForm.name,
-            password: this.ruleForm.pwd1,
-            classification:[this.checkList1.join(' '),this.checkList2.join( ),this.checkList3.join(' '),this.checkList4.join(' '),this.checkList5.join(' '),this.checkList6.join(' ')]
-       })
+        username: this.ruleForm.name,
+        password: this.ruleForm.pwd1,
+        classification: [this.checkList1.join(' '), this.checkList2.join(), this.checkList3.join(' '), this.checkList4.join(' '), this.checkList5.join(' '), this.checkList6.join(' ')]
+      })
         .then((response) => {
           this.$message({
             type: 'success',
             message: '注册成功'
           })
           this.SignUpDialogVisible = false
-
         })
         .catch((error) => {
           this.logOrNot = false
           console.log(error)
         })
-    } ,// 至于是否需要完成注册后立刻自动登录，以后再说
+    }, // 至于是否需要完成注册后立刻自动登录，以后再说
     skipTo(type) {
-      if (type == "pre") {
-        if (this.stepIndex == 1) return;
-        this.stepIndex--;
-      } else if (type == "next") {
-        this.stepIndex++;
+      if (type === 'pre') {
+        if (this.stepIndex === 1) return
+        this.stepIndex--
+      } else if (type === 'next') {
+        this.stepIndex++
       }
-    },
+    }
   }
 }
 </script>

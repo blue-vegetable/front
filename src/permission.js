@@ -8,7 +8,7 @@ import getPageTitle from '@/utils/get-page-title'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
-const whiteList = ['/login', '/searchIndex', '/writerProfile', '/searchResult', '/paperProfile', '/userCenter','/registration'] // no redirect whitelist
+const whiteList = ['/login', '/searchIndex', '/writerProfile', '/searchResult', '/paperProfile', '/userCenter'] // no redirect whitelist
 
 router.beforeEach(async(to, from, next) => {
   // start progress bar
@@ -30,9 +30,9 @@ router.beforeEach(async(to, from, next) => {
       if (hasRole) {
         next()
       } else {
-        console.log('here')
         await store.dispatch('user/getInfo')
         var role = store.getters.role
+        console.log('here is role:' + role)
         const accessRoutes = await store.dispatch('permission/generateRoutes', role)
         router.addRoutes(accessRoutes)
         next({ ...to, replace: true })
@@ -57,7 +57,6 @@ router.beforeEach(async(to, from, next) => {
     }
   } else {
     /* has no token*/
-
     if (whiteList.indexOf(to.path) !== -1) {
       // in the free login whitelist, go directly
       next()

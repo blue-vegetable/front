@@ -64,11 +64,7 @@ const actions = {
         if (!data) {
           return reject('Verification failed, please Login again.')
         }
-        const { name, avatar, role } = data
-        commit('SET_NAME', name)
-        commit('SET_AVATAR', avatar)
-        commit('SET_ROLE', role)
-        console.log('here is getInfo', name)
+        commit('SET_ROLE', data.role.toLowerCase())
         resolve(data)
       }).catch(error => {
         reject(error)
