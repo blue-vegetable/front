@@ -111,13 +111,13 @@ export default {
     }
   },
   watch: {
-    '$route'(to, from) {
-      if (to.path !== from.path && from.path !== '/') {
-        this.$router.go()
-      }
-      // console.log(to.path)
-      // console.log(from.path)
-    }
+    // '$route'(to, from) {
+    //   if (to.path !== from.path && from.path !== '/') {
+    //     this.$router.go()
+    //   }
+    // console.log(to.path)
+    // console.log(from.path)
+    // }
   },
   mounted() { // 在mount时判断用户是否登录
     if (store.getters.role) {
@@ -140,7 +140,7 @@ export default {
         this.$router.push('/message')
       }
       if (type === '5') { // 控制台
-        this.$router.push('/userCenter')
+        this.$router.push('/')
       }
       if (type === '6') { // 退出登录
         store.dispatch('user/logout')
