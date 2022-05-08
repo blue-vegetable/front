@@ -7,9 +7,10 @@
       background-color="#409eff"
       active-text-color="#ffffff"
     >
-      <el-menu-item index="/searchIndex" style="font-weight: bolder"
-        >网站首页</el-menu-item
-      >
+      <el-menu-item
+        index="/searchIndex"
+        style="font-weight: bolder"
+      >网站首页</el-menu-item>
       <div style="display: flex; justify-content: flex-end">
         <el-menu-item>
           <div>
@@ -46,40 +47,42 @@
               个人中心
             </span>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item v-if="!logOrNot" command="1" icon="el-icon-user"
-                ><el-button type="text" @click="centerDialogVisible = true"
-                  >登录</el-button
-                ></el-dropdown-item
-              >
+              <el-dropdown-item
+                v-if="!logOrNot"
+                command="1"
+                icon="el-icon-user"
+              ><el-button
+                type="text"
+                @click="centerDialogVisible = true"
+              >登录</el-button></el-dropdown-item>
               <el-dropdown-item
                 v-if="!logOrNot"
                 command="2"
                 icon="el-icon-s-order"
-                ><el-button type="text" @click="SignUpDialogVisible = true"
-                  >注册</el-button
-                ></el-dropdown-item
-              >
+              ><el-button
+                type="text"
+                @click="SignUpDialogVisible = true"
+              >注册</el-button></el-dropdown-item>
               <el-dropdown-item
                 v-if="logOrNot"
                 command="3"
                 icon="el-icon-s-fold"
-                >我的论文</el-dropdown-item
-              >
+              >我的论文</el-dropdown-item>
               <el-dropdown-item
                 v-if="logOrNot"
                 command="4"
                 icon="el-icon-message"
-                >我的消息</el-dropdown-item
-              >
-              <el-dropdown-item v-if="logOrNot" command="5" icon="el-icon-cpu"
-                >控制台</el-dropdown-item
-              >
+              >我的消息</el-dropdown-item>
+              <el-dropdown-item
+                v-if="logOrNot"
+                command="5"
+                icon="el-icon-cpu"
+              >控制台</el-dropdown-item>
               <el-dropdown-item
                 v-if="logOrNot"
                 command="6"
                 icon="el-icon-s-promotion"
-                >退出登录</el-dropdown-item
-              >
+              >退出登录</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </el-menu-item>
@@ -128,9 +131,9 @@
                 />
               </el-steps>
             </el-col>
-            <br />
-            <br />
-            <br />
+            <br>
+            <br>
+            <br>
             <el-form
               ref="ruleForm"
               :model="ruleForm"
@@ -138,7 +141,7 @@
               label-width="100px"
               class="demo-ruleForm"
             >
-              <br />
+              <br>
               <div v-show="stepIndex == 1">
                 <el-form-item label="账号名" prop="name">
                   <el-input
@@ -175,10 +178,10 @@
                 </el-form-item>
               </div>
               <div v-show="stepIndex == 2">
-                <br />
+                <br>
                 <h>请选择您擅长的领域:</h>
-                <br />
-                <br />
+                <br>
+                <br>
                 <el-row>
                   <el-checkbox-group v-model="checkList1">
                     <el-col :offset="0" :span="2">
@@ -204,7 +207,7 @@
                     </el-col>
                   </el-checkbox-group>
                 </el-row>
-                <br />
+                <br>
                 <el-row>
                   <el-checkbox-group v-model="checkList2">
                     <el-col :offset="0" :span="2">
@@ -230,7 +233,7 @@
                     </el-col>
                   </el-checkbox-group>
                 </el-row>
-                <br />
+                <br>
                 <el-row>
                   <el-checkbox-group v-model="checkList3">
                     <el-col :offset="0" :span="2">
@@ -256,7 +259,7 @@
                     </el-col>
                   </el-checkbox-group>
                 </el-row>
-                <br />
+                <br>
                 <el-row>
                   <el-checkbox-group v-model="checkList4">
                     <el-col :offset="0" :span="2">
@@ -282,7 +285,7 @@
                     </el-col>
                   </el-checkbox-group>
                 </el-row>
-                <br />
+                <br>
                 <el-row>
                   <el-checkbox-group v-model="checkList5">
                     <el-col :offset="0" :span="2">
@@ -305,7 +308,7 @@
                     </el-col>
                   </el-checkbox-group>
                 </el-row>
-                <br />
+                <br>
                 <el-row>
                   <el-checkbox-group v-model="checkList6">
                     <el-col :offset="0" :span="2">
@@ -325,26 +328,29 @@
                     </el-col>
                   </el-checkbox-group>
                 </el-row>
-                <br />
-                <br />
+                <br>
+                <br>
               </div>
               <div v-show="stepIndex == 3">
                 <h>恭喜您注册成功！</h>
               </div>
             </el-form>
           </div>
-          <br />
-          <br />
+          <br>
+          <br>
           <div>
-            <el-button v-if="stepIndex > 1" @click="skipTo('pre')"
-              >上一步</el-button
-            >
-            <el-button v-if="stepIndex < 3" @click="skipTo('next')"
-              >下一步</el-button
-            >
-            <el-button v-if="stepIndex > 2" @click="handleRegister"
-              >完成</el-button
-            >
+            <el-button
+              v-if="stepIndex > 1"
+              @click="skipTo('pre')"
+            >上一步</el-button>
+            <el-button
+              v-if="stepIndex < 3"
+              @click="skipTo('next')"
+            >下一步</el-button>
+            <el-button
+              v-if="stepIndex > 2"
+              @click="handleRegister"
+            >完成</el-button>
           </div>
         </el-col>
       </el-row>
@@ -353,19 +359,20 @@
 </template>
 
 <script>
-import store from "@/store";
-import md5 from "js-md5";
+import store from '@/store'
+import md5 from 'js-md5'
 export default {
-  name: "ResultNavBar",
+  name: 'ResultNavBar',
   data() {
-     var validatePwd2 = (rule, value, callback) => {
+    var validatePwd2 = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请再次输入密码'))
       } else if (value !== this.ruleForm.pwd1) {
         callback(new Error('两次输入密码不一致!'))
       } else {
         callback()
-      }}
+      }
+    }
     return {
       checkList1: [],
       checkList2: [],
@@ -395,15 +402,15 @@ export default {
           { required: false, message: '请输入电话', trigger: 'blur' }
         ]
       },
-      select: "1",
-      input: "",
-      userid_login: "",
-      password_login: "",
-      password_md5: "",
+      select: '1',
+      input: '',
+      userid_login: '',
+      password_login: '',
+      password_md5: '',
       logOrNot: false,
       centerDialogVisible: false,
-      SignUpDialogVisible: false,
-    };
+      SignUpDialogVisible: false
+    }
   },
   watch: {
     // '$route'(to, from) {
@@ -417,65 +424,65 @@ export default {
   mounted() {
     // 在mount时判断用户是否登录
     if (store.getters.role) {
-      console.log();
-      this.logOrNot = true;
+      console.log()
+      this.logOrNot = true
     }
   },
   methods: {
     search(select, input) {
-      console.log(select, input);
-      this.$emit("navSearch", { select: select, input: input });
+      console.log(select, input)
+      this.$emit('navSearch', { select: select, input: input })
     },
     handleSelect(key, keyPath) {},
     handleDropdown(type) {
-      if (type === "3") {
+      if (type === '3') {
         // 我的论文
-        this.$router.push("/papers");
+        this.$router.push('/papers')
       }
-      if (type === "4") {
+      if (type === '4') {
         // 我的消息
-        this.$router.push("/message");
+        this.$router.push('/message')
       }
-      if (type === "5") {
+      if (type === '5') {
         // 控制台
-        this.$router.push("/");
+        this.$router.push('/')
       }
-      if (type === "6") {
+      if (type === '6') {
         // 退出登录
-        store.dispatch("user/logout");
-        this.logOrNot = false;
+        store.dispatch('user/logout')
+        this.logOrNot = false
         this.$message({
-          type: "success",
-          message: `注销成功`,
-        });
+          type: 'success',
+          message: `注销成功`
+        })
       }
     },
     handleLogin() {
-      this.password_md5 = md5(this.password_login);
+      this.password_md5 = md5(this.password_login)
       this.$store
-        .dispatch("user/login", {
+        .dispatch('user/login', {
           username: this.userid_login,
-          password: this.password_md5,
+          password: this.password_md5
         })
         // this.$axios.post('/vue-admin-template/user/login', {
         //   username: this.userid_login,
         //   password: this.password_md5
         // })
         .then(() => {
-          this.logOrNot = true;
-          this.centerDialogVisible = false;
+          this.logOrNot = true
+          this.centerDialogVisible = false
           this.$message({
-            type: "success",
-            message: `登录成功`,
-          });
-          this.logOrNot = true;
+            type: 'success',
+            message: `登录成功`
+          })
+          this.logOrNot = true
         })
         .catch((error) => {
-          this.logOrNot = false;
-          console.log(error);
-        });
+          this.logOrNot = false
+          console.log(error)
+        })
     },
-     handleRegister() {
+    handleRegister() {
       console.log('register here')
       this.password_md5 = md5(this.ruleForm.pwd1)
       this.$axios.post('http://124.220.30.8:12000/user/register', {
@@ -503,6 +510,6 @@ export default {
         this.stepIndex++
       }
     }
-  },
-};
+  }
+}
 </script>

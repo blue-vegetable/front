@@ -8,35 +8,32 @@
     <br><br>
     <div class="paperAbstract">摘要：{{ paper.summary }}</div>
     <br>
-    <div class="paperYinyongliang">
-      下载量：{{ paper.downloads }}
-    </div>
+
     <br>
     <div class="tag-group">
       <span class="paperKeyword">关键词：</span>
-      <el-button type="success" plain>{{ paper.keywords[0] }}</el-button>
-      <el-button type="info" plain>{{ paper.keywords[1] }}</el-button>
-      <el-button type="warning" plain>{{ paper.keywords[2] }}</el-button>
-
+      <el-button v-for="(keyword,index) in paper.keywords" :key="index" :type="types[index%3]" round>{{ keyword }}</el-button>
       <br>
       <br>
     </div>
     <el-row>
       <el-col :offset="0" :span="2">
-        <el-badge :value="12" class="item">
-          <el-button size="small">下载</el-button>
+        <el-badge :value="paper.downloads" class="item">
+          <el-button size="small" @click="download">下载</el-button>
         </el-badge>
       </el-col>
 
       <el-col :offset="3" :span="2">
-        <el-badge :value="likenum" class="item" type="primary">
-          <el-button size="small" @click="like">喜欢</el-button>
+        <el-badge :value="paper.like" class="item" type="danger">
+          <el-button v-if="likeOrNot" size="small" type="danger" @click="like"> 已喜欢 </el-button>
+          <el-button v-if="!likeOrNot" size="small" @click="like">喜欢</el-button>
         </el-badge>
       </el-col>
 
       <el-col :offset="3" :span="2">
-        <el-badge :value="2" class="item" type="warning">
-          <el-button size="small">收藏</el-button>
+        <el-badge :value="paper.star" class="item" type="primary">
+          <el-button v-if="starOrNot" size="small" type="primary" @click="star"> 已收藏 </el-button>
+          <el-button v-if="!starOrNot" size="small" @click="star">收藏</el-button>
         </el-badge>
       </el-col>
     </el-row>
@@ -64,35 +61,104 @@
 </style>
 
 <script>
+import store from '@/store'
 export default {
   name: 'PaperMiddle',
-  props: ['id'],
   data() {
     return {
+      id: this.$route.query.id,
       paper: '',
-      likenum: 11
+      types: ['primary', 'success', 'info', 'danger'],
+      likeOrNot: false,
+      starOrNot: false
     }
   },
 
   mounted() {
     this.getPaper()
+    if (store.getters.token) {
+      this.$axios.defaults.headers.common['token'] = store.getters.token
+      this.$axios.get('http://124.220.30.8:12000/paper/likePaperQuery?paperId=' + this.id)
+        .then(response => {
+          this.likeOrNot = response.data.data.result === 1
+        })
+        .catch(error => console.log(error))
+      this.$axios.get('http://124.220.30.8:12000/paper/starPaperQuery?paperId=' + this.id)
+        .then(response => {
+          this.starOrNot = response.data.data.result === 1
+        })
+        .catch(error => console.log(error))
+    }
   },
-
   methods: {
     getPaper() {
       this.$axios.get('http://124.220.30.8:12000/paper/getPaper?paperId=' + this.id)
         .then(response => {
           this.paper = response.data
           this.paper.keywords = (this.paper.keywords).split(';')
-          console.log(this.paper)
+          if (this.paper.keywords.length === 1) { // 如果是中文引号则还需要额外处理
+            this.paper.keywords = this.paper.keywords[0].split('；')
+          }
         })
         .catch(error => console.log(error))
     },
     like() {
-      this.likenum++
-      console('123')
+      this.$axios.defaults.headers.common['token'] = store.getters.token
+      this.$axios.get('http://124.220.30.8:12000/paper/like?paperId=' + this.id)
+        .then(response => {
+          if (response.data.code === 3001) {
+            this.$message({
+              message: '用户未登录',
+              type: 'warning'
+            })
+          } else {
+            if (response.data.message === '点赞成功') {
+              this.paper.like++
+            } else {
+              this.paper.like--
+            }
+            this.$message({
+              message: response.data.message,
+              type: 'success'
+            })
+            this.likeOrNot = !this.likeOrNot
+          }
+        })
+        .catch(error => console.log(error))
+    },
+    star() {
+      console.log()
+      this.$axios.defaults.headers.common['token'] = store.getters.token
+      this.$axios.get('http://124.220.30.8:12000/paper/star?paperId=' + this.id)
+        .then(response => {
+          if (response.data.code === 3001) {
+            this.$message({
+              message: '用户未登录',
+              type: 'warning'
+            })
+          } else {
+            if (response.data.message === '收藏成功') {
+              this.paper.star++
+            } else {
+              this.paper.star--
+            }
+            this.$message({
+              message: response.data.message,
+              type: 'success'
+            })
+            this.starOrNot = !this.starOrNot
+          }
+        })
+        .catch(error => console.log(error))
+    },
+    download() {
+      this.$axios.get('http://124.220.30.8:12000/paper/download?paperId=' + this.id)
+        .then(resp => {
+          console.log(resp)
+        })
+        .catch(error => console.log(error))
     }
   }
-
 }
+
 </script>
