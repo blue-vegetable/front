@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import { fetchList } from '@/api/article'
+import { fetchRawComment } from '@/api/comment'
 
 export default {
   filters: {
@@ -76,12 +76,6 @@ export default {
   data() {
     return {
       list: null,
-      listQuery: {
-        page: 1,
-        limit: 5,
-        type: this.type,
-        sort: '+id'
-      },
       loading: false
     }
   },
@@ -91,8 +85,8 @@ export default {
   methods: {
     getList() {
       this.loading = true
-      fetchList(this.listQuery).then(response => {
-        this.list = response.data.items
+      fetchRawComment().then(response => {
+        this.list = response.data
         this.loading = false
       })
     }

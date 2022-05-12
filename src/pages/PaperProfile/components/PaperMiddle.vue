@@ -73,6 +73,8 @@ export default {
       starOrNot: false
     }
   },
+  watch: {
+  },
 
   mounted() {
     this.getPaper()
@@ -152,11 +154,23 @@ export default {
         .catch(error => console.log(error))
     },
     download() {
-      this.$axios.get('http://124.220.30.8:12000/paper/download?paperId=' + this.id)
-        .then(resp => {
-          console.log(resp)
+      // this.$axios.defaults.headers.common['token'] = store.getters.token
+      this.$axios.get(
+        'http://localhost:12000/paper/download?paperId=' + this.id
+        // responseType: 'blob',
+        // headers: { token: store.getters.token }
+      )
+        .then(res => {
+          var FILE = window.URL.createObjectURL(new Blob([res.data]))
+          var docUrl = document.createElement('x')
+          docUrl.href = FILE
+          docUrl.setAttribute('download', 'file.pdf')
+          document.body.appendChild(docUrl)
+          docUrl.click()
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+          console.log(error)
+        })
     }
   }
 }

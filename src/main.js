@@ -16,9 +16,9 @@ import '@/icons' // icon
 import '@/permission' // permission control
 import './plugins/element.js'
 import axios from 'axios'
-import '../mock/papers.js'
-import '../mock/paper.js'
-import '../mock/comment.js'
+// import '../mock/papers.js'
+// import '../mock/paper.js'
+// import '../mock/comment.js'
 
 Vue.prototype.$axios = axios
 /**
