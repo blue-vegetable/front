@@ -64,7 +64,7 @@ const actions = {
         if (!data) {
           return reject('Verification failed, please Login again.')
         }
-        commit('SET_ROLE', data.role.toLowerCase())
+        commit('SET_ROLE', data.username.toLowerCase())
         resolve(data)
       }).catch(error => {
         reject(error)

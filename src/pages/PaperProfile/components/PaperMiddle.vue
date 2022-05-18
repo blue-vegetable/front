@@ -37,7 +37,6 @@
         </el-badge>
       </el-col>
     </el-row>
-
   </div>
 </template>
 
@@ -80,7 +79,12 @@ export default {
     this.getPaper()
     if (store.getters.token) {
       this.$axios.defaults.headers.common['token'] = store.getters.token
-      this.$axios.get('http://124.220.30.8:12000/paper/likePaperQuery?paperId=' + this.id)
+      this.$axios(
+        {
+          methods: 'GET',
+          url: 'http://124.220.30.8:12000/paper/likePaperQuery?paperId=' + this.id,
+          timeout: 4000
+        })
         .then(response => {
           this.likeOrNot = response.data.data.result === 1
         })
@@ -155,11 +159,13 @@ export default {
     },
     download() {
       // this.$axios.defaults.headers.common['token'] = store.getters.token
-      this.$axios.get(
-        'http://localhost:12000/paper/download?paperId=' + this.id
-        // responseType: 'blob',
-        // headers: { token: store.getters.token }
-      )
+      this.$axios({
+        methods: 'get',
+        url: 'http://124.220.30.8:12000/paper/download?paperId=' + this.id,
+        responseType: 'blob',
+        // timeout: 4000,
+        headers: { token: store.getters.token }
+      })
         .then(res => {
           var FILE = window.URL.createObjectURL(new Blob([res.data]))
           var docUrl = document.createElement('x')
