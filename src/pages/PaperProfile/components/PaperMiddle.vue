@@ -167,11 +167,12 @@ export default {
         headers: { token: store.getters.token }
       })
         .then(res => {
-          var FILE = window.URL.createObjectURL(new Blob([res.data]))
-          var docUrl = document.createElement('x')
+          console.log(res.data)
+          var FILE = window.URL.createObjectURL(new Blob([res.data], { type: 'application/pdf' }))
+          var docUrl = document.createElement('a')
           docUrl.href = FILE
-          docUrl.setAttribute('download', 'file.pdf')
-          document.body.appendChild(docUrl)
+          docUrl.download = '123'
+          // document.body.appendChild(docUrl)
           docUrl.click()
         })
         .catch(error => {

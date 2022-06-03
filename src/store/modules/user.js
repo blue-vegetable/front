@@ -64,9 +64,13 @@ const actions = {
         if (!data) {
           return reject('Verification failed, please Login again.')
         }
+        if (!data.username) {
+          data.username = 'admin'
+        }
         commit('SET_ROLE', data.username.toLowerCase())
         resolve(data)
       }).catch(error => {
+        console.log('here getInfo error')
         reject(error)
       })
     })
