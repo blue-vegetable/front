@@ -1,9 +1,9 @@
 <template>
   <div>
     <div v-for="(paper, index) in papers" :key="index" class="paperRight">
-      <el-link style="margin-bottom:10px"> <router-link to="/paperProfile">{{ index + 1 }} {{ paper.name }}</router-link></el-link>
+      <el-link style="margin-bottom:10px"> <router-link to="/paperProfile">{{ index + 1 }} {{ paper.paperName }}</router-link></el-link>
       <el-row :gutter="10">
-        <el-col :span="14"> <el-tag>{{ paper.time+'上传' }}</el-tag> </el-col>
+        <el-col :span="14"> <el-tag>{{ paper.time.replace('T','').slice(0,10)+'上传' }}</el-tag> </el-col>
         <el-col :span="6"><el-tag type="success">多星好评</el-tag></el-col>  <!--这里多设置几个类型，以后再说-->
       </el-row>
       <br>
@@ -25,45 +25,22 @@
 <script>
 export default {
   name: 'ResultMiddle',
+  mounted(){
+    this.getLastestPaper()
+  },
   data() {
     return {
       papers: [
-        {
-          id: '123',
-          name: '这是一片论文',
-          writer: 'A Kosba,A Miller,E Shi,Z Wen,C Papamanthou',
-          rate: '3',
-          time: '2022年01月02日'
-        },
-        {
-          id: '123',
-          name: '这是一片论文ryptography and Privacy-Preserving Smart Contracts',
-          writer: 'A Kosba,A Miller,E Shi,Z Wen,C Papamanthou',
-          rate: '3',
-          time: '2022年01月02日'
-        },
-        {
-          id: '123',
-          name: 'Hawk: The Blockchai这是一片论文reserving Smart Contracts',
-          writer: 'A Kosba,A Miller,E Shi,Z Wen,C Papamanthou',
-          rate: '3',
-          time: '2022年01月02日'
-        },
-        {
-          id: '123',
-          name: 'Hawk: The Blockchain Model of Cryptography and Pri这是一片论文racts',
-          writer: 'A Kosba,A Miller,E Shi,Z Wen,C Papamanthou',
-          rate: '3',
-          time: '2022年01月02日'
-        },
-        {
-          id: '123',
-          name: 'Hawk: The Blockchain Model of Cryptography and Pri这是一片论文racts',
-          writer: 'A Kosba,A Miller,E Shi,Z Wen,C Papamanthou',
-          rate: '3',
-          time: '2022年01月02日'
-        }
       ]
+    }
+  },
+  methods: {
+    getLastestPaper() {
+      this.$axios.get('http://124.220.30.8:12000/paper/getLatest')
+        .then(response => {
+          this.papers = response.data
+        })
+        .catch(error => console.log(error))
     }
   }
 }

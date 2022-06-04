@@ -3,12 +3,13 @@
     <div v-for="(paper, index) in papers" :id="'paper' + index" :key="index">
       <el-link type="primary"><router-link class="paperName" :to="{ path: '/paperProfile', query: { id: paper.id }}">{{ paper.paperName }}</router-link></el-link>
       <br><br>
-      <el-link><router-link class="paperWriter" :to="{ path: '/writerProfile', query: { id: paper.writerId }}">{{ paper.writerName }}</router-link></el-link>
+      <el-link><router-link style="font-size:small" :to="{ path: '/writerProfile', query: { id: paper.writerId }}">{{ paper.writerName }}</router-link></el-link>
       <br>
-      <div class="paperAbstract">{{ paper.summary }}</div>
+      <br>
+      <div style="font-size: small;line-height: 22px;">{{ paper.summary }}</div>
       <br>
       <div class="paperRate">
-        用户评分：{{ paper.star }} <br> 上传时间 : {{ paper.time }}
+        用户评分：{{ paper.star }} <br> 上传时间 : {{ paper.time.replace('T',' ').slice(0,19) }}
       </div>
       <el-divider />
     </div>
