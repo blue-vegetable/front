@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <br>
+    <!-- <br>
     <div style="text-align:center">
       <PaperUpload />
-    </div>
+    </div> -->
     <br>
     <PaperForm />
   </div>

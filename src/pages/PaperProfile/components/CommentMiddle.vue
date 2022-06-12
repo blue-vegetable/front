@@ -2,7 +2,7 @@
   <div>
     <div v-for="(comment, index) in comments" :id="'comment' + index" :key="index">
       <el-card class="box-card" shadow="always" style="background-color:#f5f7fa">
-      <el-link><router-link class="commentWriter" :to="{ path: '/writerProfile', query: { id: comment.writer }}"><div style="color:black">作者 : {{ comment.name }}</div></router-link></el-link>
+      <el-link><router-link class="commentWriter" :to="{ path: '/writerProfile', query: { id: comment.writer }}"><div style="color:black">评论人 : {{ comment.name }}</div></router-link></el-link>
       <br><br>
       <div class="commentContent">内容 : {{ comment.content }}</div>
       <br><br>
@@ -43,7 +43,7 @@ export default {
           address: "上海市普陀区金沙江路 1518 弄",
           content: "这篇论文对于区块链在存证电子数据方面的说的很明白，有兴趣了解这块论文的朋友可以从这篇论文入手，里面关于当前区块链和司法的结合的论述也可以借鉴的。",
           paper:"论区块链存证电子数据的优势及司法审查路径",
-          rate:'9.3'
+          rate:'9'
         },
         {
           hash: "6bb22f1a9be94d9291364",
@@ -52,7 +52,7 @@ export default {
           address: "上海市普陀区金沙江路 1517 弄",
           content: "我正好在写一篇区块链和司法审查结合的论文，这篇论文给了我一些提示，建议想了解目前电子数据伪造问题和相应司法实践的朋友可以下载来看一下。",
           paper:"论区块链存证电子数据的优势及司法审查路径",
-          rate:'9.8'
+          rate:'9'
         },
         {
           hash: "08b3fada1cc835c79d468",
@@ -61,7 +61,7 @@ export default {
           address: "上海市普陀区金沙江路 1519 弄",
           paper:"论区块链存证电子数据的优势及司法审查路径",
           content: "深度好文，推荐阅读",
-          rate:'4.9'
+          rate:'10'
         },
         {
           hash: "af43dd83c77630dbad657",
@@ -70,7 +70,7 @@ export default {
           address: "上海市普陀区金沙江路 1516 弄",
           paper:"论区块链存证电子数据的优势及司法审查路径",
           content:"是一篇对区块链的应用于司法相结合的文章，里面涉及了区块链的原理和司法审查步骤等基础知识，并且对区块链的优点等内容说明较详细，有相关工作的朋友们可以看看",
-          rate:'9.5'
+          rate:'8'
        },
       ],
     }

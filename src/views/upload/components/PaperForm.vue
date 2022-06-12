@@ -1,56 +1,49 @@
 <template>
+<div style="width:800px">
+  <h3 style="text-align:center"> 论文举报 </h3>
   <el-form ref="ruleForm" :model="ruleForm" :rules="rules" label-width="100px" class="demo-ruleForm">
-    <el-form-item label="论文名称" prop="name">
+    <el-form-item label="论文ID" prop="id">
       <el-input v-model="ruleForm.name" />
     </el-form-item>
-    <el-form-item label="论文类别" prop="region">
-      <el-cascader :options="options" :show-all-levels="false" :v-model="ruleForm.region" :placeholder="请选择活动区域" />
+     <el-form-item label="论文名称" prop="name">
+      <el-input v-model="ruleForm.name" />
     </el-form-item>
-    <el-form-item label="发表时间" required>
-      <el-col :span="11">
-        <el-form-item prop="date1">
-          <el-date-picker v-model="ruleForm.date1" type="date" placeholder="选择日期" style="width: 100%;" />
-        </el-form-item>
-      </el-col>
-      <el-col class="line" :span="2">-</el-col>
-      <el-col :span="11">
-        <el-form-item prop="date2">
-          <el-time-picker v-model="ruleForm.date2" placeholder="选择时间" style="width: 100%;" />
-        </el-form-item>
-      </el-col>
-    </el-form-item>
-    <el-form-item label="论文来源" prop="type">
+   
+    <el-form-item label="举报理由" prop="type">
       <el-checkbox-group v-model="ruleForm.type">
-        <el-checkbox label="期刊" name="type" />
-        <el-checkbox label="会议" name="type" />
-        <el-checkbox label="杂志" name="type" />
-        <el-checkbox label="学位论文" name="type" />
+        <el-checkbox label="论文抄袭" name="type" />
+        <el-checkbox label="论文盗用" name="type" />
+        <el-checkbox label="劣质论文" name="type" />
+        <el-checkbox label="其他" name="type" />
       </el-checkbox-group>
     </el-form-item>
-    <el-form-item label="作者类别" prop="resource">
-      <el-radio-group v-model="ruleForm.resource">
-        <el-radio label="单作者" />
-        <el-radio label="多作者" />
-      </el-radio-group>
-    </el-form-item>
-    <el-form-item label="作者" prop="desc">
+    <el-form-item label="详细理由" prop="desc">
       <el-input v-model="ruleForm.desc" type="textarea" />
     </el-form-item>
-    <el-form-item label="摘要" prop="desc1">
+    <div style="text-align: center;margin:auto">
+    <paper-upload />
+    </div>
+    <el-form-item label="相关证据" prop="desc1">
       <el-input v-model="ruleForm.desc" type="textarea" />
     </el-form-item>
-    <el-form-item label="关键词" prop="desc2">
-      <el-input v-model="ruleForm.desc" type="textarea" />
-    </el-form-item>
+    
+    <br>
     <el-form-item>
-      <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
-      <el-button @click="resetForm('ruleForm')">重置</el-button>
+      <div>
+      <el-button type="primary" @click="submitForm('ruleForm')">提交举报</el-button>
+      <el-button @click="resetForm('ruleForm')">取消</el-button>
+      </div>
     </el-form-item>
   </el-form>
+</div>
 </template>
 
 <script>
+import PaperUpload from './PaperUpload.vue'
 export default {
+   components: {
+    PaperUpload
+  },
   data() {
     return {
       ruleForm: {
@@ -66,6 +59,8 @@ export default {
         desc2: ''
       },
       rules: {
+        id:{
+          required:true,message:'请输入论文ID',trigger:"blur"},
         name: [
           { required: true, message: '请输入论文名称', trigger: 'blur' },
           { min: 3, max: 5, message: '长度在 0 到 20 个字符', trigger: 'blur' }
