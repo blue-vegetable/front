@@ -65,7 +65,7 @@ const actions = {
           return reject('Verification failed, please Login again.')
         }
         if (!data.username) {
-          data.username = 'admin'
+          data.username = 'editor'
         }
         commit('SET_ROLE', data.username.toLowerCase())
         resolve(data)

@@ -18,8 +18,8 @@
     </div>
     <el-row>
       <el-col :offset="0" :span="2">
-        <el-badge :value="paper.downloads" class="item">
-          <el-button size="small" @click="download">下载</el-button>
+        <el-badge :value="1" class="item">
+          <el-button size="small" @click="download">已购买</el-button>
         </el-badge>
       </el-col>
 
@@ -171,7 +171,7 @@ export default {
           var FILE = window.URL.createObjectURL(new Blob([res.data], { type: 'application/pdf' }))
           var docUrl = document.createElement('a')
           docUrl.href = FILE
-          docUrl.download = '123'
+          docUrl.download = '论区块链存证电子数据的优势及司法审查路径'
           // document.body.appendChild(docUrl)
           docUrl.click()
         })
