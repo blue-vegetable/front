@@ -17,14 +17,14 @@
         <el-menu-item index="dashboard">
           <el-badge v-if="logOrNot" :value="1" class="item">
             <el-dropdown @command="handleDropdown">
-            <i style="margin-top:-15px" class="el-icon-message" />
-            <el-dropdown-menu slot="dropdown">
-              <!-- <el-dropdown-item> 有用户下载了您的论文 <span style="color:blue">《钙钛矿太阳能电池电子传输层的研究进展》</span> <span style="color:red">35</span> 代币已转入您的账户 <el-link type="primary">点击查看详细信息</el-link></el-dropdown-item>
+              <i style="margin-top:-15px" class="el-icon-message" />
+              <el-dropdown-menu slot="dropdown">
+                <!-- <el-dropdown-item> 有用户下载了您的论文 <span style="color:blue">《钙钛矿太阳能电池电子传输层的研究进展》</span> <span style="color:red">35</span> 代币已转入您的账户 <el-link type="primary">点击查看详细信息</el-link></el-dropdown-item>
                <el-dropdown-item> 有用户下载了您的论文 <span style="color:blue">《钙钛矿太阳能电池电子传输层的研究进展》</span> <span style="color:red">35</span> 代币已转入您的账户 <el-link type="primary">点击查看详细信息</el-link></el-dropdown-item>
                <el-dropdown-item> 有用户下载了您的论文 <span style="color:blue">《复合相变材料的制备及其电子器件热控应用研究》</span> <span style="color:red">20</span> 代币已转入您的账户 <el-link type="primary">点击查看详细信息</el-link></el-dropdown-item> -->
-            <el-dropdown-item> 您提交的对论文<span style="color:blue"> 《机械设计制造的数字化与智能化发展研究》</span>的 <el-tag>论文抄袭</el-tag> 举报未通过, 管理员驳回了您的举报请求。<br> 点击查看详情</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
+                <el-dropdown-item> 您提交的对论文<span style="color:blue"> 《机械设计制造的数字化与智能化发展研究》</span>的 <el-tag>论文抄袭</el-tag> 举报未通过, 管理员驳回了您的举报请求。<br> 点击查看详情</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
           </el-badge>
         </el-menu-item>
         <el-menu-item index="5">
@@ -81,7 +81,7 @@
   <el-descriptions-item label="当前点赞数">2</el-descriptions-item>
   <el-descriptions-item label="当前下载量">3</el-descriptions-item>
   <el-descriptions-item label="当前评论得分">7.9分</el-descriptions-item>
-  
+
 </el-descriptions>
     </el-dialog> -->
     <!-- 下面是注册弹窗，为减少组件传参故直接放于此NavBar中 -->
@@ -458,7 +458,7 @@ export default {
       rules: {
         name: [
           { required: true, message: '请输入账号', trigger: 'blur' },
-          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+          { min: 3, max: 20, message: '长度在 3 到 5 个字符', trigger: 'blur' }
         ],
         pwd1: [{ required: true, message: '请输入密码', trigger: 'blur' }],
         pwd2: [{ required: true, validator: validatePwd2, message: '两次输入密码不一致', trigger: 'blur' }],

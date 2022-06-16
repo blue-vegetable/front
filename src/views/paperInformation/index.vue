@@ -1,38 +1,50 @@
 <template>
-  <el-card style="width:70%;text-align:center;margin:auto;margin-top:50px">
-      <p> 尊敬的用户，自注册以来，您一共上传论文共6篇<br>
-           总下载量共
-      </p>
-    <el-table :data="tableData" style="width: 100%">
-      <el-table-column type="expand">
-        <template slot-scope="props">
-          <el-form label-position="left" inline class="demo-table-expand">
-            <el-form-item label="论文HASH">
-              <span>{{ props.row.name }}</span>
-            </el-form-item>
-            <el-form-item label="论文名">
-              <span>{{ props.row.shop }}</span>
-            </el-form-item>
-            <el-form-item label="下载量">
-              <span>{{ props.row.id }}</span>
-            </el-form-item>
-            <el-form-item label="点赞量">
-              <span>{{ props.row.shopId }}</span>
-            </el-form-item>
-            <el-form-item label="引用量">
-              <span>{{ props.row.category }}</span>
-            </el-form-item>
-            <el-form-item label="收益">
-              <span>{{ props.row.address }}</span>
-            </el-form-item>
-          </el-form>
-        </template>
-      </el-table-column>
-      <el-table-column label="论文名称" prop="id"> </el-table-column>
-      <el-table-column label="下载量" prop="name"> </el-table-column>
-      <el-table-column label="引用量" prop="reference"> </el-table-column>
-      <el-table-column label="总收益" prop="desc"> </el-table-column>
+  <el-card style="width:90%;text-align:center;margin:auto;margin-top:50px">
+    <el-table
+      :data="tableData"
+      border
+      show-summary
+      style="width: 100%"
+    >
+      <el-table-column
+        prop="id"
+        label="论文HASH"
+      />
+      <el-table-column
+        prop="name"
+        label="论文名"
+        width="100px"
+      />
+      <el-table-column
+        prop="download"
+        sortable
+        label="下载量"
+      />
+      <el-table-column
+        prop="like"
+        sortable
+        label="点赞量"
+      />
+      <el-table-column
+        prop="star"
+        sortable
+        label="引用量"
+      /> <el-table-column
+        prop="comment"
+        sortable
+        label="评论数"
+      /><el-table-column
+        prop="rate"
+        sortable
+        label="评论得分"
+      />
+      <el-table-column
+        prop="profit"
+        sortable
+        label="收益"
+      />
     </el-table>
+
   </el-card>
 </template>
 
@@ -57,43 +69,44 @@ export default {
     return {
       tableData: [
         {
-          id: "12987122",
-          name: "好滋好味鸡蛋仔",
-          category: "江浙小吃、小吃零食",
-          desc: "荷兰优质淡奶，奶香浓而不腻",
-          address: "上海市普陀区真北路",
-          shop: "王小虎夫妻店",
-          shopId: "10333",
-        },
-        {
-          id: "12987123",
-          name: "好滋好味鸡蛋仔",
-          category: "江浙小吃、小吃零食",
-          desc: "荷兰优质淡奶，奶香浓而不腻",
-          address: "上海市普陀区真北路",
-          shop: "王小虎夫妻店",
-          shopId: "10333",
-        },
-        {
-          id: "12987125",
-          name: "好滋好味鸡蛋仔",
-          category: "江浙小吃、小吃零食",
-          desc: "荷兰优质淡奶，奶香浓而不腻",
-          address: "上海市普陀区真北路",
-          shop: "王小虎夫妻店",
-          shopId: "10333",
-        },
-        {
-          id: "12987126",
-          name: "好滋好味鸡蛋仔",
-          category: "江浙小吃、小吃零食",
-          desc: "荷兰优质淡奶，奶香浓而不腻",
-          address: "上海市普陀区真北路",
-          shop: "王小虎夫妻店",
-          shopId: "10333",
-        },
-      ],
-    };
-  },
-};
+          id: '6273ab25932f68759cd78197124256',
+          name: '论文名古希腊医学与先秦两汉时期中医学的洗浴疗法比较',
+          download: '12',
+          like: '7',
+          star: '1',
+          comment: '5',
+          rate: '9',
+          profit: '127'
+        }, {
+          id: '129871226273ab4d932f68759cd78198',
+          name: '论文名从现代医学与中医学角度认知医护协作的价值',
+          download: '7',
+          like: '3',
+          star: '0',
+          comment: '4',
+          rate: '8',
+          profit: '123'
+        }, {
+          id: '6273ac33932f68759cd7819912987122',
+          name: 'The Current Situation of the App_..._ing Traditional Chinese Medicine',
+          download: '9',
+          like: '3',
+          star: '0',
+          comment: '0',
+          rate: '8',
+          profit: '123'
+        }, {
+          id: '6273ac64932f68759cd7819a12987122',
+          name: '论文名Research on the Teaching Reform _..._ of Traditional Chinese Medicine',
+          download: '15',
+          like: '7',
+          star: '2',
+          comment: '3',
+          rate: '9',
+          profit: '123'
+        }
+      ]
+    }
+  }
+}
 </script>
