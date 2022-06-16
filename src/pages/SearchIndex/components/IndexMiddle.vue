@@ -5,7 +5,10 @@
       <br><br>
       <el-link><router-link class="paperWriter" :to="{ path: '/writerProfile', query: { id: paper.writerId }}">{{ paper.writerName }}</router-link></el-link>
       <br>
-      <div class="paperAbstract">{{ paper.summary }}</div>
+      <div
+        style="font-size: small;
+            line-height: 22px;"
+      >{{ paper.summary }}</div>
       <br>
       <div class="paperRate">
         用户评分：{{ paper.star }} <br> 上传时间 : {{ paper.time }}
@@ -23,7 +26,7 @@
   font-size: small;
 }
 .paperAbstract {
-  font-size: small;
+ font-size: small;
   line-height: 22px;
 }
 .paperRate {
