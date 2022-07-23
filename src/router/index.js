@@ -150,7 +150,7 @@ export const userRoutes = [
     children: [
       {
         path: 'complex-table',
-        component: () => import('@/views/table/complex-table'),
+        component: () => import('@/views/paperInformation'),
         name: 'compleTable',
         meta: { title: '已上传论文', icon: 'el-icon-s-help' }
       },

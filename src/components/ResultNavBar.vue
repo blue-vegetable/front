@@ -31,7 +31,7 @@
               </el-select>
               <el-button
                 slot="append"
-                style="background-color: 0xffffff"
+                style="background-color: 0xffffffff"
                 icon="el-icon-search"
                 @click="search(select, input)"
               />
