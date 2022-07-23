@@ -38,7 +38,7 @@ export default {
   },
 
   mounted() {
-    this.$axios.get('http://124.220.30.8:12000/feedback/comment')
+    this.$axios.get('http://106.52.79.36:12000/feedback/comment')
       .then(response => {
         this.comments = response.data
         console.log(this.comments)
@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     getcomment() {
-      this.$axios.get('http://124.220.30.8:12000/feedback/comment')
+      this.$axios.get('http://106.52.79.36:12000/feedback/comment')
         .then(response => (this.comments = response.data))
         .catch(error => console.log(error))
     }

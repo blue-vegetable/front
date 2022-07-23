@@ -130,7 +130,7 @@ export default {
   },
   methods: {
     getLastestPaper() {
-      this.$axios.get('http://124.220.30.8:12000/paper/getLatest')
+      this.$axios.get('http://106.52.79.36:12000/paper/getLatest')
         .then(response => {
           this.latestPapers = response.data
         })

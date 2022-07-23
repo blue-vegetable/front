@@ -1,52 +1,73 @@
 <template>
-  <el-form ref="ruleForm" :model="ruleForm" :rules="rules" label-width="100px" class="demo-ruleForm">
-    <el-form-item label="论文名称" prop="name">
-      <el-input v-model="ruleForm.name" />
-    </el-form-item>
-    <el-form-item label="论文类别" prop="region">
-      <el-cascader :options="options" :show-all-levels="false" :v-model="ruleForm.region" :placeholder="请选择活动区域" />
-    </el-form-item>
-    <el-form-item label="发表时间" required>
-      <el-col :span="11">
-        <el-form-item prop="date1">
-          <el-date-picker v-model="ruleForm.date1" type="date" placeholder="选择日期" style="width: 100%;" />
-        </el-form-item>
-      </el-col>
-    </el-form-item>
-    <el-form-item label="论文来源" prop="type">
-      <el-checkbox-group v-model="ruleForm.type">
-        <el-checkbox label="期刊" name="type" />
-        <el-checkbox label="会议" name="type" />
-        <el-checkbox label="杂志" name="type" />
-        <el-checkbox label="学位论文" name="type" />
-      </el-checkbox-group>
-    </el-form-item>
-    <el-form-item label="免费开放" prop="resource">
-      <el-radio-group v-model="ruleForm.resource">
-        <el-radio label="是" />
-        <el-radio label="否" />
-      </el-radio-group>
-    </el-form-item>
-    <el-form-item label="作者" prop="desc">
-      <el-input v-model="ruleForm.desc" type="textarea" />
-    </el-form-item>
-    <el-form-item label="摘要" prop="desc1">
-      <el-input v-model="ruleForm.summary" type="textarea" />
-    </el-form-item>
-    <el-form-item label="关键词" prop="desc2">
-      <el-input v-model="ruleForm.keyword" type="textarea" />
-    </el-form-item>
-    <el-form-item>
-      <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
-      <el-button @click="resetForm('ruleForm')">重置</el-button>
-    </el-form-item>
-  </el-form>
+  <div>
+    <el-form ref="ruleForm" :model="ruleForm" :rules="rules" label-width="100px" class="demo-ruleForm">
+      <el-form-item>
+        <div style="text-align: center">
+          <el-upload
+            class="upload-demo"
+            drag
+            action="#"
+            multiple
+            :http-request="submitForm"
+            :on-change="handlePreview"
+            :auto-upload="false"
+          >
+            <i class="el-icon-upload" />
+            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+            <div slot="tip" class="el-upload__tip">只能上传pdf/docx文件，且不超过10M</div>
+          </el-upload>
+        </div></el-form-item>
+      <el-form-item label="论文名称" prop="name">
+        <el-input v-model="ruleForm.name" />
+      </el-form-item>
+      <el-form-item label="论文类别" prop="region">
+        <el-cascader v-model="ruleForm.region" :options="options" :show-all-levels="false" placeholder="请选择论文类别" />
+      </el-form-item>
+      <el-form-item label="发表时间" required>
+        <el-col :span="11">
+          <el-form-item prop="date1">
+            <el-date-picker v-model="ruleForm.date1" type="date" placeholder="选择日期" style="width: 100%;" />
+          </el-form-item>
+        </el-col>
+      </el-form-item>
+      <el-form-item label="论文来源" prop="type">
+        <el-checkbox-group v-model="ruleForm.type">
+          <el-checkbox label="期刊" name="type" />
+          <el-checkbox label="会议" name="type" />
+          <el-checkbox label="杂志" name="type" />
+          <el-checkbox label="学位论文" name="type" />
+        </el-checkbox-group>
+      </el-form-item>
+      <el-form-item label="免费开放" prop="resource">
+        <el-radio-group v-model="ruleForm.resource">
+          <el-radio label="是" />
+          <el-radio label="否" />
+        </el-radio-group>
+      </el-form-item>
+      <el-form-item label="作者" prop="desc">
+        <el-input v-model="ruleForm.desc" type="textarea" />
+      </el-form-item>
+      <el-form-item label="摘要" prop="desc1">
+        <el-input v-model="ruleForm.summary" type="textarea" />
+      </el-form-item>
+      <el-form-item label="关键词" prop="desc2">
+        <el-input v-model="ruleForm.keyword" type="textarea" />
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="submitForm">立即创建</el-button>
+        <el-button @click="resetForm('ruleForm')">重置</el-button>
+      </el-form-item>
+    </el-form>
+  </div>
 </template>
 
 <script>
+import store from '@/store'
+
 export default {
   data() {
     return {
+      file: '',
       ruleForm: {
         name: '',
         region: '',
@@ -67,7 +88,7 @@ export default {
           { min: 3, max: 20, message: '长度在 0 到 20 个字符', trigger: 'blur' }
         ],
         region: [
-          { required: true, message: '请选择领域', trigger: 'blur' }
+          { required: false, message: '请选择领域', trigger: 'blur' }
         ],
         date1: [
           { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
@@ -92,141 +113,185 @@ export default {
         ]
       },
       options: [{
-        value: 'wen',
+        value: '文',
         label: '文',
         children: [{
-          value: 'wenxue',
+          value: '文学',
           label: '文学'
         }, {
-          value: 'yishu',
+          value: '艺术',
           label: '艺术'
         }, {
-          value: 'lishi',
+          value: '历史',
           label: '历史'
         }, {
-          value: 'zhexue',
+          value: '哲学',
           label: '哲学'
         }, {
-          value: 'guanli',
+          value: '管理',
           label: '管理'
         }, {
-          value: 'jiaoyu',
+          value: '教育',
           label: '教育'
         }]
       }, {
-        value: 'fa',
+        value: '法',
         label: '法',
         children: [{
-          value: 'xgf',
+          value: '习惯法',
           label: '习惯法'
         }, {
-          value: 'zgf',
+          value: '自然法',
           label: '自然法'
         }, {
-          value: 'flsx',
+          value: '法律思想',
           label: '法律思想'
         }, {
-          value: 'fjjx',
+          value: '法经济学',
           label: '法经济学'
         }, {
-          value: 'fshx',
+          value: '法社会学',
           label: '法社会学'
         }, {
-          value: 'fzx',
+          value: '法哲学',
           label: '法哲学'
         }]
       }, {
-        value: 'li',
+        value: '理',
         label: '理',
         children: [{
-          value: 'sw',
+          value: '生物',
           label: '生物'
         }, {
-          value: 'hx',
+          value: '化学',
           label: '化学'
         }, {
-          value: 'wl',
+          value: '物理',
           label: '物理'
         }, {
-          value: 'sx',
+          value: '数学',
           label: '数学'
         }, {
-          value: 'tw',
+          value: '天文',
           label: '天文'
         }, {
-          value: 'dqkx',
+          value: '地球科学',
           label: '地球科学'
         }]
       }, {
-        value: 'gong',
+        value: '工',
         label: '工',
         children: [{
-          value: 'jxj',
+          value: '计算机',
           label: '计算机'
         }, {
-          value: 'dz',
+          value: '电子',
           label: '电子'
         }, {
-          value: 'jx',
+          value: '机械',
           label: '机械'
         }, {
-          value: 'clkx',
+          value: '材料科学',
           label: '材料科学'
         }, {
-          value: 'sl',
+          value: '水利',
           label: '水利'
         }, {
-          value: 'jz',
+          value: '建筑',
           label: '建筑'
         }]
       }, {
-        value: 'nong',
+        value: '农',
         label: '农',
         children: [{
-          value: 'nyjj',
+          value: '农业经济',
           label: '农业经济'
         }, {
-          value: 'nygc',
+          value: '农业工程',
           label: '农业工程'
         }, {
-          value: 'yy',
+          value: '园艺',
           label: '园艺'
         }, {
-          value: 'xm',
+          value: '畜牧',
           label: '畜牧'
         }, {
-          value: 'nyjckx',
+          value: '农业基础科学',
           label: '农业基础科学'
         }]
       }, {
-        value: 'yi',
+        value: '医',
         label: '医',
         children: [{
-          value: 'zyx',
+          value: '中医学',
           label: '中医学'
         }, {
-          value: 'lcyx',
+          value: '临床医学',
           label: '临床医学'
         }, {
-          value: 'jcyx',
+          value: '基础医学',
           label: '基础医学'
         }, {
-          value: 'kqyx',
+          value: '口腔医学',
           label: '口腔医学'
         }]
       }]
     }
   },
   methods: {
-    submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          alert('submit!')
-        } else {
-          console.log('error submit!!')
-          return false
+    handlePreview(file) {
+      this.file = file
+    },
+    submitForm() {
+      // const FileController = 'http://106.52.79.36:12000/paper/upload'
+      const FileController = 'http://106.52.79.36:12000/paper/upload'
+      const form = new FormData()
+      form.append('paperfile', this.file.raw)
+      form.append('paperName', this.ruleForm.name)
+      form.append('writerName', this.ruleForm.desc)
+      form.append('keywords', this.ruleForm.keyword)
+      form.append('summary', this.ruleForm.summary)
+      form.append('free', this.ruleForm.resource === '是')
+      form.append('category', this.ruleForm.region[0])
+      form.append('classification', this.ruleForm.region[1])
+      const xhr = new XMLHttpRequest()
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+          if (xhr.response.status === '0') {
+            this.$message({
+              type: 'error',
+              message: '上传失败'
+            })
+          } else if (xhr.response.status === '1'){
+            this.$message({
+              type: 'success',
+              message: '上传成功'
+            })
+          }
         }
-      })
+      }
+      xhr.open('post', FileController, true)
+      xhr.setRequestHeader('token', store.getters.token)
+      xhr.send(form)
+
+      // this.$refs['ruleForm'].validate((valid) => {
+      //   if (valid) {
+      //     this.$axios.defaults.headers.common['token'] = store.getters.token
+      //     this.$axios.post('http://106.52.79.36:12000/paper/upload', {
+      //       paperName: this.ruleForm.name,
+      //       writerName: this.ruleForm.desc,
+      //       keywords: this.ruleForm.keyword,
+      //       summary: this.ruleForm.summary,
+      //       free: this.ruleForm.resource === '是',
+      //       category: this.ruleForm.region[0],
+      //       classification: this.ruleForm.region[1],
+      //       paperfile: this.file.raw
+      //     })
+      //   } else {
+      //     console.log('error submit!!')
+      //     return false
+      //   }
+      // })
     },
     resetForm(formName) {
       this.$refs[formName].resetFields()

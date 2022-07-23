@@ -485,7 +485,7 @@ export default {
     handleRegister() {
       console.log('register here')
       this.password_md5 = md5(this.ruleForm.pwd1)
-      this.$axios.post('http://124.220.30.8:12000/user/register', {
+      this.$axios.post('http://106.52.79.36:12000/user/register', {
         username: this.ruleForm.name,
         password: this.ruleForm.pwd1,
         classification: [this.checkList1.join(' '), this.checkList2.join(), this.checkList3.join(' '), this.checkList4.join(' '), this.checkList5.join(' '), this.checkList6.join(' ')]

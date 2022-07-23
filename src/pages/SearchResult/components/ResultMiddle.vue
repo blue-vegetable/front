@@ -76,7 +76,7 @@ export default {
       } else if (this.select === '1') {
         paperName = this.input
       }
-      this.$axios.get('http://124.220.30.8:12000/paper/searchPaper?writerName=' + writerName + '&paperName=' + paperName + '&keywords=' + this.keyword + '&time=' + this.year)
+      this.$axios.get('http://106.52.79.36:12000/paper/searchPaper?writerName=' + writerName + '&paperName=' + paperName + '&keywords=' + this.keyword + '&time=' + this.year)
         .then(response => (this.papers = response.data))
         .catch(error => console.log(error))
     }

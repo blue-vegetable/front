@@ -496,24 +496,32 @@ export default {
         })
     },
     handleRegister() {
-      console.log('register here')
       this.password_md5 = md5(this.ruleForm.pwd1)
-      this.$axios.post('http://124.220.30.8:12000/user/register', {
-        username: this.ruleForm.name,
-        password: this.ruleForm.pwd1,
-        classification: [this.checkList1.join(' '), this.checkList2.join(), this.checkList3.join(' '), this.checkList4.join(' '), this.checkList5.join(' '), this.checkList6.join(' ')]
-      })
+      this.$store.dispatch('user/register', { 'username': this.userid_login, 'password': this.password_md5, classification: [this.checkList1.join(' '), this.checkList2.join(), this.checkList3.join(' '), this.checkList4.join(' '), this.checkList5.join(' '), this.checkList6.join(' ')] })
         .then((response) => {
-          this.$message({
-            type: 'success',
-            message: '注册成功'
-          })
+          if (response.data.code === 1004) {
+            this.$message({
+              type: 'error',
+              message: '用户名已存在'
+            })
+          } else {
+            this.$message({
+              type: 'success',
+              message: '注册成功'
+            })
+          }
           this.SignUpDialogVisible = false
         })
         .catch((error) => {
           this.logOrNot = false
           console.log(error)
         })
+
+      // this.$axios.post('http://106.52.79.36:12000/user/register', {
+      //   username: this.ruleForm.name,
+      //   password: this.password_md5,
+      //   classification: [this.checkList1.join(' '), this.checkList2.join(), this.checkList3.join(' '), this.checkList4.join(' '), this.checkList5.join(' '), this.checkList6.join(' ')]
+      // })
     }, // 至于是否需要完成注册后立刻自动登录，以后再说
     skipTo(type) {
       if (type === 'pre') {

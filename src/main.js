@@ -16,9 +16,6 @@ import '@/icons' // icon
 import '@/permission' // permission control
 import './plugins/element.js'
 import axios from 'axios'
-// import '../mock/papers.js'
-// import '../mock/paper.js'
-// import '../mock/comment.js'
 
 Vue.prototype.$axios = axios
 /**
@@ -29,10 +26,6 @@ Vue.prototype.$axios = axios
  * Currently MockJs will be used in the production environment,
  * please remove it before going online ! ! !
  */
-// if (process.env.NODE_ENV === 'production') {
-// const { mockXHR } = require('../mock')
-// mockXHR()
-// }
 
 // set ElementUI lang to EN
 Vue.use(ElementUI, { locale })

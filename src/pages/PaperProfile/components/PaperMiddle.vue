@@ -18,8 +18,8 @@
     </div>
     <el-row>
       <el-col :offset="0" :span="2">
-        <el-badge :value="1" class="item">
-          <el-button size="small" @click="download">已购买</el-button>
+        <el-badge :value="paper.downloads" class="item">
+          <el-button size="small" @click="download">购买</el-button>
         </el-badge>
       </el-col>
 
@@ -82,14 +82,14 @@ export default {
       this.$axios(
         {
           methods: 'GET',
-          url: 'http://124.220.30.8:12000/paper/likePaperQuery?paperId=' + this.id,
+          url: 'http://106.52.79.36:12000/paper/likePaperQuery?paperId=' + this.id,
           timeout: 4000
         })
         .then(response => {
           this.likeOrNot = response.data.data.result === 1
         })
         .catch(error => console.log(error))
-      this.$axios.get('http://124.220.30.8:12000/paper/starPaperQuery?paperId=' + this.id)
+      this.$axios.get('http://106.52.79.36:12000/paper/starPaperQuery?paperId=' + this.id)
         .then(response => {
           this.starOrNot = response.data.data.result === 1
         })
@@ -98,7 +98,7 @@ export default {
   },
   methods: {
     getPaper() {
-      this.$axios.get('http://124.220.30.8:12000/paper/getPaper?paperId=' + this.id)
+      this.$axios.get('http://106.52.79.36:12000/paper/getPaper?paperId=' + this.id)
         .then(response => {
           this.paper = response.data
           this.paper.keywords = (this.paper.keywords).split(';')
@@ -110,7 +110,7 @@ export default {
     },
     like() {
       this.$axios.defaults.headers.common['token'] = store.getters.token
-      this.$axios.get('http://124.220.30.8:12000/paper/like?paperId=' + this.id)
+      this.$axios.get('http://106.52.79.36:12000/paper/like?paperId=' + this.id)
         .then(response => {
           if (response.data.code === 3001) {
             this.$message({
@@ -133,9 +133,8 @@ export default {
         .catch(error => console.log(error))
     },
     star() {
-      console.log()
       this.$axios.defaults.headers.common['token'] = store.getters.token
-      this.$axios.get('http://124.220.30.8:12000/paper/star?paperId=' + this.id)
+      this.$axios.get('http://106.52.79.36:12000/paper/star?paperId=' + this.id)
         .then(response => {
           if (response.data.code === 3001) {
             this.$message({
@@ -159,19 +158,26 @@ export default {
     },
     download() {
       // this.$axios.defaults.headers.common['token'] = store.getters.token
+      if (!store.getters.token) {
+        this.$message({
+          type: 'warning',
+          message: '用户未登录'
+        })
+        return
+      }
       this.$axios({
         methods: 'get',
-        url: 'http://124.220.30.8:12000/paper/download?paperId=' + this.id,
+        url: 'http://106.52.79.36:12000/paper/download?paperId=' + this.id,
         responseType: 'blob',
         // timeout: 4000,
         headers: { token: store.getters.token }
       })
         .then(res => {
-          console.log(res.data)
+          // console.log(res.data)
           var FILE = window.URL.createObjectURL(new Blob([res.data], { type: 'application/pdf' }))
           var docUrl = document.createElement('a')
           docUrl.href = FILE
-          docUrl.download = '论区块链存证电子数据的优势及司法审查路径'
+          docUrl.download = this.paper.paperName
           // document.body.appendChild(docUrl)
           docUrl.click()
         })
