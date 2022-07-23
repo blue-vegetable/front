@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <ResultNavBar />
-    <br />
+    <br>
     <PaperTitle />
     <el-row>
       <!-- 这个el-row为了限制card的大小, 使其占中间位置 -->
@@ -12,34 +12,34 @@
               <PaperMiddle :id="id" />
             </el-col>
           </el-row>
-          <br />
+          <br>
         </el-card>
-        <PaperButton />
-        <br />
-        <br />
+<!--        <PaperButton />-->
+        <br>
+        <br>
         <el-row>
           <PaperComment />
         </el-row>
         <el-divider />
-        <br />
+        <br>
 
         <CommentMiddle />
-        <br />
+        <br>
       </el-col>
     </el-row>
   </div>
 </template>
 
 <script>
-import PaperTitle from "./components/PaperTitle.vue";
-import PaperButton from "./components/PaperButton.vue";
-import PaperMiddle from "./components/PaperMiddle.vue";
-import PaperComment from "./components/PaperComment.vue";
-import CommentMiddle from "./components/CommentMiddle.vue";
-import ResultNavBar from "@/components/ResultNavBar.vue";
+import PaperTitle from './components/PaperTitle.vue'
+import PaperButton from './components/PaperButton.vue'
+import PaperMiddle from './components/PaperMiddle.vue'
+import PaperComment from './components/PaperComment.vue'
+import CommentMiddle from './components/CommentMiddle.vue'
+import ResultNavBar from '@/components/ResultNavBar.vue'
 
 export default {
-  name: "PaperProfile",
+  name: 'PaperProfile',
 
   components: {
     PaperTitle,
@@ -47,17 +47,17 @@ export default {
     PaperComment,
     ResultNavBar,
     CommentMiddle,
-    PaperMiddle,
+    PaperMiddle
   },
   data() {
     return {
-      id: this.$route.query.id,
-    };
+      id: this.$route.query.id
+    }
   },
   mounted() {
-    console.log(this.$route.query.id);
-  },
-};
+    console.log(this.$route.query.id)
+  }
+}
 </script>
 
 <style>

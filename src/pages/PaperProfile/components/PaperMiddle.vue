@@ -51,7 +51,7 @@
   font-size:larger;
   line-height: 22px;
 }
-.paperYinyongliang {
+.paper{
   font-size: larger;
 }
 .paperKeyword{

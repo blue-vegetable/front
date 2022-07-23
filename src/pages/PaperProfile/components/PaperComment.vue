@@ -1,38 +1,46 @@
 <template>
   <div>
-    <el-input placeholder="期待您的精彩评论" type="textarea" :rows="4"> </el-input>
+    <el-input v-model="input" placeholder="期待您的精彩评论" type="textarea" :rows="4" />
     <br>
     <br>
-    <div style="text-align:right"> <el-button>发表您的评论</el-button></div>
-      <!-- <br> -->
-
+    <el-rate
+      v-model="value"
+      :colors="colors"
+    />
+    <div style="text-align: right;">
+      <el-button @click="submit">发表您的评论</el-button>
+    </div>
   </div>
-</template>   
+</template>
 
 <script>
+import store from '@/store'
 export default {
   data() {
     return {
       // 弹出输入框
-      dialogVisible: false,
-      secureCode: "",
-      value2: null,
-      colors: ["#99A9BF", "#F7BA2A", "#FF9900"],
-    };
+      input: '',
+      id: this.$route.query.id,
+      value: null,
+      colors: ['#99A9BF', '#F7BA2A', '#FF9900']
+    }
   },
   methods: {
-    // 弹窗输入对话框
-    showConfirmCodeDialog() {
-      this.dialogVisible = true; // 显示弹窗
-    },
-    open() {
-      this.dialogVisible = false;
-      this.$message({
-        type: "success",
-        message:
-          "你的评论是: " + this.secureCode + "  你的评分是: " + this.value2,
-      });
-    },
-  },
-};
+    submit() {
+      if (store.getters.token) {
+        this.$axios.defaults.headers.common['token'] = store.getters.token
+        this.$axios.post('http://106.52.79.36:12000/paper/addComment', { comment: this.input, paperId: this.id, rate: this.value })
+        this.$message({
+          type: 'success',
+          message: '评论成功'
+        })
+      } else {
+        this.$message({
+          type: 'warning',
+          message: '用户未登录'
+        })
+      }
+    }
+  }
+}
 </script>

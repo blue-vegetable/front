@@ -262,7 +262,7 @@ export default {
               type: 'error',
               message: '上传失败'
             })
-          } else if (xhr.response.status === '1'){
+          } else if (xhr.response.status === '1') {
             this.$message({
               type: 'success',
               message: '上传成功'
