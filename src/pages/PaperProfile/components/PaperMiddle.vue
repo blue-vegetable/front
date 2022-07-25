@@ -1,8 +1,56 @@
 <template>
   <div>
-    <div class="paperName">
-      {{ paper.paperName }}
-    </div>
+    <span class="paperName">
+      {{ paper.paperName }} <el-button type="warning" size="mini" plain @click="reportVisible=true">点击举报</el-button>
+    </span>
+    <br>
+    <el-dialog
+      title="举报论文"
+      :visible.sync="reportVisible"
+      width="50%"
+      center
+    >
+
+      <el-form ref="form" :model="form" label-width="80px">
+        <el-form-item label="论文名">
+          <el-input disabled> {{this.paper.paperName}}</el-input>
+        </el-form-item>
+        <el-form-item label="论文hash">
+          <el-input disabled> {{this.id}}</el-input>
+        </el-form-item>
+
+        <el-form-item label="举报理由">
+          <el-checkbox-group v-model="form.type">
+            <el-checkbox label="美食/餐厅线上活动" name="type" />
+            <el-checkbox label="地推活动" name="type" />
+            <el-checkbox label="线下主题活动" name="type" />
+            <el-checkbox label="单纯品牌曝光" name="type" />
+          </el-checkbox-group>
+        </el-form-item>
+        <el-form-item label="特殊资源">
+          <el-radio-group v-model="form.resource">
+            <el-radio label="线上品牌商赞助" />
+            <el-radio label="线下场地免费" />
+          </el-radio-group>
+        </el-form-item>
+        <el-form-item label="活动形式">
+          <el-input v-model="form.desc" type="textarea" />
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="onSubmit">立即创建</el-button>
+          <el-button>取消</el-button>
+        </el-form-item>
+
+      </el-form>
+      <el-descriptions-item label="联系地址">江苏省苏州市吴中区吴中大道 1188 号</el-descriptions-item>
+      </el-descriptions>
+
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="reportVisible = false">取 消</el-button>
+        <el-button type="primary" @click="handleReport">提 交</el-button>
+      </span>
+    </el-dialog>
+
     <br><br>
     <el-link><router-link class="paperWriter" :to="{ path: '/writerProfile', query: { id: paper.writerId }}">作者：{{ paper.writerName }}</router-link></el-link>
     <br><br>
@@ -65,6 +113,7 @@ export default {
   name: 'PaperMiddle',
   data() {
     return {
+      reportVisible: false,
       id: this.$route.query.id,
       paper: '',
       types: ['primary', 'success', 'info', 'danger'],
@@ -97,6 +146,9 @@ export default {
     }
   },
   methods: {
+    handleReport() {
+
+    },
     getPaper() {
       this.$axios.get('http://106.52.79.36:12000/paper/getPaper?paperId=' + this.id)
         .then(response => {

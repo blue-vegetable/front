@@ -1,96 +1,134 @@
 <template>
-  <el-table :data="tableData" style="width: 100%">
-    <el-table-column label="评论HASH" width="210" align="center">
-      <template slot-scope="scope">
-        <i class="el-icon-time"></i>
-        <span style="margin-left: 10px">{{ scope.row.hash }}</span>
-      </template>
-    </el-table-column>
-    <el-table-column label="评论日期" width="160" align="center">
-      <template slot-scope="scope">
-        <i class="el-icon-time"></i>
-        <span style="margin-left: 10px">{{ scope.row.date }}</span>
-      </template>
-    </el-table-column>
-    <el-table-column label="评论人" width="130" align="center">
-       <template slot-scope="scope">
-        <i class="el-icon-time"></i>
-        <span style="margin-left: 10px">{{ scope.row.name }}</span>
-      </template>
-    </el-table-column>
-    <el-table-column label="论文名" width="200" align="center">
-       <template slot-scope="scope">
-        <i class="el-icon-time"></i>
-        <span style="margin-left: 10px">{{ scope.row.paper }}</span>
-      </template>
-    </el-table-column>
-    <el-table-column label="评论内容" width="400" header-align="center">
-       <template slot-scope="scope">
-        <el-popover trigger="hover" placement="top">
-          <p>{{scope.row.content}}</p>
-          <div slot="reference" class="name-wrapper">
-            {{ scope.row.content }}
+  <div>
+    <el-table :data="tableData" style="width: 100%">
+      <el-table-column label="评论HASH" width="210" align="center">
+        <template slot-scope="scope">
+          <i class="el-icon-time" />
+          <span style="margin-left: 10px">{{ scope.row.commentHash }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="审核日期" width="160" align="center">
+        <template slot-scope="scope">
+          <i class="el-icon-time" />
+          <span style="margin-left: 10px">{{ scope.row.date }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="审核人" width="130" header-align="center">
+        <template slot-scope="scope">
+          <i class="el-icon-time" />
+          <span style="margin-left: 10px">{{ scope.row.userId }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="论文id" width="200" header-align="center">
+        <template slot-scope="scope">
+          <i class="el-icon-time" />
+          <span style="margin-left: 10px">{{ scope.row.paperId }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="评论内容" width="400" header-align="left">
+        <template slot-scope="scope">
+          <el-popover trigger="hover" placement="top">
+            <p>{{ scope.row.comment }}</p>
+            <div slot="reference" class="name-wrapper">
+              {{ scope.row.comment.slice(0,25) }}
+            </div>
+          </el-popover>
+        </template>
+      </el-table-column>
+      <el-table-column label="操作">
+        <template slot-scope="scope">
+          <el-button
+            size="mini"
+            type="primary"
+            @click="checkVis = true;check(scope.row)"
+          >审核</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+    <div>
+      <el-dialog
+        title="审核评论"
+        :visible.sync="checkVis"
+        width="50%"
+        center
+      >
+        <el-descriptions title="评论详情" direction="vertical" border>
+          <el-descriptions-item label="评论HASH">{{ checkData.commentHash }}</el-descriptions-item>
+          <el-descriptions-item label="日期">{{ checkData.date }}</el-descriptions-item>
+          <el-descriptions-item label="评论评分">{{ checkData.rate }}</el-descriptions-item>
+          <el-descriptions-item label="评论内容" :span="2">{{ checkData.comment }}</el-descriptions-item>
+          <el-descriptions-item label="评论人hash">{{ checkData.userId }}</el-descriptions-item>
+          <el-descriptions-item label="论文hash">{{ checkData.paperId }}</el-descriptions-item>
+        </el-descriptions>
+        <br>
+        <h3>请在下面输入您的审核结果</h3>
+        <el-form>
+          <div style="text-align:center">
+            <el-rate
+              v-model="rate"
+              :texts="texts"
+              show-text
+            />
+            <br>
+            <el-input
+              v-model="input"
+              type="textarea"
+              placeholder="如需要，您可以在此输入审核理由"
+              maxlength="30"
+              show-word-limit
+            />
+            <br>
+            <br>
+            <el-button type="primary" @click="submitCheckInfo">提交审核 </el-button>
           </div>
-        </el-popover>
-      </template>
-    </el-table-column>
-    <el-table-column label="操作">
-      <template slot-scope="scope">
-        <el-button size="mini" type="primary"
-          >审核</el-button
-        >
-      </template>
-    </el-table-column>
-  </el-table>
+        </el-form>
+      </el-dialog>
+    </div>
+  </div>
 </template>
 
 <script>
+import store from '@/store'
+
 export default {
   data() {
     return {
-      tableData: [
-        {
-          hash: "1b67b73f6045e94a51ab5",
-          date: "2022-06-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄",
-          content: "这篇论文对于区块链在存证电子数据方面的说的很明白，有兴趣了解这块论文的朋友可以从这篇论文入手，里面关于当前区块链和司法的结合的论述也可以借鉴的。",
-          paper:"论区块链存证电子数据的优势及司法审查路径"
-        },
-        {
-          hash: "6bb22f1a9be94d9291364",
-          date: "2022-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄",
-          content: "我正好在写一篇区块链和司法审查结合的论文，这篇论文给了我一些提示，建议想了解目前电子数据伪造问题和相应司法实践的朋友可以下载来看一下。",
-           paper:"论区块链存证电子数据的优势及司法审查路径"
-        },
-        {
-          hash: "08b3fada1cc835c79d468",
-          date: "2022-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄",
-          paper:"论区块链存证电子数据的优势及司法审查路径",
-          content: "深度好文，推荐阅读",
-        },
-        {
-          hash: "af43dd83c77630dbad657",
-          date: "2022-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄",
-          paper:"论区块链存证电子数据的优势及司法审查路径",
-          content:"是一篇对区块链的应用于司法相结合的文章，里面涉及了区块链的原理和司法审查步骤等基础知识，并且对区块链的优点等内容说明较详细，有相关工作的朋友们可以看看"
-        },
-      ],
-    };
+      input: '',
+      rate: '',
+      texts: ['肯定是水军', '几乎是水军', '可能是水军', '是真实评论', '必不是水军'],
+      checkVis: false,
+      tableData: [],
+      checkData: {}
+    }
+  },
+  mounted() {
+    this.getCommentCheck()
   },
   methods: {
+    submitCheckInfo() {
+      this.$axios.defaults.headers.common['token'] = store.getters.token
+      this.$axios.post('http://106.52.79.36:12000/user/dealComment', { 'rate': this.rate, 'input': this.input, 'commentHash': this.checkData.commentHash })
+        .then(
+          res => { console.log(res); this.$router.go(0) }
+
+        ).catch(
+          error => console.log(error)
+        )
+    },
+    check(res) {
+      this.checkData = res
+    },
+    getCommentCheck() {
+      this.$axios.defaults.headers.common['token'] = store.getters.token
+      this.$axios.get('http://106.52.79.36:12000/user/allAssignedComment').then(response => {
+        this.tableData = response.data
+        console.log(response.data)
+      }).catch(error => console.log(error))
+    },
     handleEdit(index, row) {
-      console.log(index, row);
     },
     handleDelete(index, row) {
-      console.log(index, row);
-    },
-  },
-};
+    }
+  }
+}
 </script>

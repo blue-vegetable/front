@@ -64,10 +64,10 @@ const actions = {
         if (!data) {
           return reject('Verification failed, please Login again.')
         }
-        if (!data.username) {
-          data.username = 'editor'
+        if (data.role !== 'ADMIN') {
+          data.role = 'EDITOR'
         }
-        commit('SET_ROLE', data.username.toLowerCase())
+        commit('SET_ROLE', data.role.toLowerCase())
         resolve(data)
       }).catch(error => {
         console.log('here getInfo error')
