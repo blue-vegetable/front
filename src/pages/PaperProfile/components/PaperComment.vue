@@ -34,6 +34,7 @@ export default {
           type: 'success',
           message: '评论成功'
         })
+        setTimeout(() => { this.$router.go(0) }, 1000)
       } else {
         this.$message({
           type: 'warning',
