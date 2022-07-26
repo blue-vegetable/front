@@ -58,7 +58,7 @@
           查看详情
         </el-button>
         <el-dialog
-          title="《机械设计制造的数字化与智能化发展研究》举报详情"
+          title="《机械设计制造的数字化与智能化发展研究》举报详情 "
           :visible.sync="detailInformation"
           width="50%"
           center
@@ -139,7 +139,7 @@
                 <el-checkbox label="论文抄袭" name="type" />
                 <el-checkbox label="论文盗用" name="type" />
                 <el-checkbox label="劣质论文" name="type" />
-                <el-checkbox label="其他违规行为" name="type" /> <el-input placeholder="请在此输入具体其他违规行为" /> 
+                <el-checkbox label="其他违规行为" name="type" /> <el-input placeholder="请在此输入具体其他违规行为" />
               </el-checkbox-group>
             </el-form-item>
             <br />

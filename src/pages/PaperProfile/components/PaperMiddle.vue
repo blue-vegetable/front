@@ -13,37 +13,42 @@
 
       <el-form ref="form" :model="form" label-width="80px">
         <el-form-item label="论文名">
-          <el-input disabled> {{this.paper.paperName}}</el-input>
+          <el-input disabled :value="this.paper.paperName" />
         </el-form-item>
         <el-form-item label="论文hash">
-          <el-input disabled> {{this.id}}</el-input>
+          <el-input disabled :value="id" />
         </el-form-item>
 
         <el-form-item label="举报理由">
           <el-checkbox-group v-model="form.type">
-            <el-checkbox label="美食/餐厅线上活动" name="type" />
-            <el-checkbox label="地推活动" name="type" />
-            <el-checkbox label="线下主题活动" name="type" />
-            <el-checkbox label="单纯品牌曝光" name="type" />
+            <el-checkbox label="论文抄袭" name="1" />
+            <el-checkbox label="论文盗用" name="2" />
+            <el-checkbox label="劣质论文" name="3" />
+            <el-checkbox label="其他" name="4" />
           </el-checkbox-group>
         </el-form-item>
-        <el-form-item label="特殊资源">
-          <el-radio-group v-model="form.resource">
-            <el-radio label="线上品牌商赞助" />
-            <el-radio label="线下场地免费" />
-          </el-radio-group>
-        </el-form-item>
-        <el-form-item label="活动形式">
-          <el-input v-model="form.desc" type="textarea" />
+        <el-form-item label="详细理由">
+          <el-input v-model="form.reason" />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="onSubmit">立即创建</el-button>
-          <el-button>取消</el-button>
+          <el-upload
+            style="text-align: left"
+            class="upload-demo"
+            drag
+            action="#"
+            multiple
+            :http-request="submitForm"
+            :on-change="handlePreview"
+            :auto-upload="false"
+          >
+            <i class="el-icon-upload" />
+            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+          </el-upload>
         </el-form-item>
-
+        <el-form-item label="其他证据">
+          <el-input v-model="form.proof" placeholder="可在此处输入其他证据" />
+        </el-form-item>
       </el-form>
-      <el-descriptions-item label="联系地址">江苏省苏州市吴中区吴中大道 1188 号</el-descriptions-item>
-      </el-descriptions>
 
       <span slot="footer" class="dialog-footer">
         <el-button @click="reportVisible = false">取 消</el-button>
@@ -113,6 +118,12 @@ export default {
   name: 'PaperMiddle',
   data() {
     return {
+      form: {
+        type: [],
+        reason: '',
+        proof: ''
+      },
+      file: '',
       reportVisible: false,
       id: this.$route.query.id,
       paper: '',
@@ -146,8 +157,37 @@ export default {
     }
   },
   methods: {
+    handlePreview(file) {
+      console.log(file)
+      this.file = file
+    },
     handleReport() {
-
+      this.submitForm()
+    },
+    submitForm() {
+      const fileController = 'http://106.52.79.36:12000/feedback/add'
+      const form = new FormData()
+      var a = this.form.type.join(' ')
+      form.append('paperId', this.id)
+      form.append('writerId', this.paper.writerId)
+      form.append('type', a)
+      form.append('reason', this.form.reason)
+      form.append('evidence', this.file.raw)
+      form.append('description', this.form.proof)
+      const xhr = new XMLHttpRequest()
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+          if (xhr.response.status === '0') {
+            this.message({
+              type: 'success',
+              message: '上传成功'
+            })
+          }
+        }
+      }
+      xhr.open('post', fileController, true)
+      xhr.setRequestHeader('token', store.getters.token)
+      xhr.send(form)
     },
     getPaper() {
       this.$axios.get('http://106.52.79.36:12000/paper/getPaper?paperId=' + this.id)
